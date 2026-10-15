@@ -449,8 +449,7 @@ function drawVn() {
   const n = vn.stage.length;
   vn.stage.forEach((st, i) => {
     const L = LOOKS[st.key];
-    const tall = L.legLen + L.torso + 33;
-    const S = (470 / tall) * (["future", "kim", "han"].includes(st.key) ? 1.06 : 1);
+    const S = 8.2;                                    // 모두 같은 배율 → 키 차이가 그대로 보임 (무릎 아래는 화면 밖)
     const targetX = n === 1 ? 480 : i === 0 ? 300 : 660;
     // 처음 등장할 때는 옆에서 미끄러져 들어온다
     st.x = st.x === null ? targetX + (targetX < 480 ? -90 : 90) : st.x + (targetX - st.x) * 0.15;
@@ -465,10 +464,10 @@ function drawVn() {
     vctx.save();
     vctx.globalAlpha = st.alpha;
     if (!speaking && vn.speaker !== "narr") vctx.filter = "brightness(0.62)";   // 말하지 않는 사람은 어둡게
-    vctx.translate(st.x + m.x, 640 + (speaking ? 0 : 8) + m.y);
+    vctx.translate(st.x + m.x, 880 + (speaking ? 0 : 8) + m.y);
     vctx.rotate(m.rot);
     vctx.scale(S * (n === 2 && i === 1 ? -1 : 1), S * breath);              // 오른쪽 사람은 왼쪽을 보게
-    drawFigure(vctx, L, { expr: st.expr, blink: st.blinkT < 0, ol: 0.5, talk,
+    drawFigure(vctx, L, { expr: st.expr, blink: st.blinkT < 0, ol: 0.24, talk,
                           sway: Math.sin(clockTime * 1.7 + i * 2) * 0.9 });
     vctx.restore();
   });
@@ -1130,7 +1129,7 @@ function updateNpc(n, dt, me) {
 const canvas = $("world");
 const ctx = canvas.getContext("2d");
 let scale = 1;
-const SPRITE = 1.08;
+const SPRITE = 0.62;   // 지도 위 캐릭터 크기 배율 (키 약 100 → 62픽셀)
 function resize() {
   const dpr = Math.min(2, window.devicePixelRatio || 1);
   const rect = canvas.getBoundingClientRect();
@@ -1304,7 +1303,7 @@ function drawRoomSigns() {
 
 function drawActor(c, isMe, me) {
   const L = c.look;
-  const tall = (L.legLen + L.torso + 33) * SPRITE;
+  const tall = figureHeight(L) * SPRITE;
   const bob = c.moving ? Math.abs(Math.sin(c.walk)) * 1.6 : Math.sin(clockTime * 2.2 + c.x) * 0.35;
   const hop = c.hop > 0 ? Math.sin((c.hop / 0.45) * Math.PI) * 14 : 0;
   ellipse(c.x, c.y + 1, 13, 4.5, "rgba(30,10,40,0.22)");
@@ -1312,7 +1311,8 @@ function drawActor(c, isMe, me) {
   ctx.translate(c.x, c.y - bob - hop);
   if (c.spin > 0) ctx.scale(Math.cos(c.spin * 21), 1);
   ctx.scale(c.dir * SPRITE, SPRITE);
-  drawFigure(ctx, L, { moving: c.moving, walk: c.walk, expr: c.exprT > 0 ? c.expr : "normal", blink: c.blinkT < 0, ol: 0.95 });
+  drawFigure(ctx, L, { moving: c.moving, walk: c.walk, expr: c.exprT > 0 ? c.expr : "normal", blink: c.blinkT < 0, ol: 1.3,
+                       sway: Math.sin(clockTime * 1.7 + c.x) * 0.8 });
   ctx.restore();
 
   const top = c.y - tall - bob - hop;
@@ -1370,7 +1370,7 @@ function drawBubble(c) {
   const lines = wrapText(c.bubble.text, 150);
   const w = Math.max(...lines.map((l) => ctx.measureText(l).width)) + 18;
   const h = lines.length * 17 + 10;
-  const tall = (c.look.legLen + c.look.torso + 33) * SPRITE;
+  const tall = figureHeight(c.look) * SPRITE;
   const x = Math.min(Math.max(c.x - w / 2, 8), W - w - 8);
   const y = Math.max(6, c.y - tall - 24 - h);
   ctx.save();
