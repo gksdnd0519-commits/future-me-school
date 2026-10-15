@@ -249,13 +249,20 @@ async function api(path, body) {
   if (busy) return null;
   busy = true;
   try {
-    const options = body === undefined ? {} : {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    };
-    const res = await fetch(path, options);
-    const data = await res.json();
+    let data;
+    if (window.LOCAL_API) {
+      // 인터넷 공개 버전 : 서버 대신 브라우저 안의 local-api.js 가 규칙을 계산
+      data = window.LOCAL_API(path, body);
+    } else {
+      // 내 컴퓨터 버전 : 파이썬 서버(app.py)에 요청
+      const options = body === undefined ? {} : {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      };
+      const res = await fetch(path, options);
+      data = await res.json();
+    }
     server = data;
     renderHUD(data);
     handleEvent(data);
@@ -765,6 +772,15 @@ function update(dt) {
   $("prompt").classList.toggle("hidden", !(canPrompt && (nearNpc || (nearSpot && !server.ended))));
 
   updateDialog(dt);
+
+  // --- 점수판(HUD) 뒤에 내 캐릭터가 가려지면 그 판을 반투명하게 ---
+  const cr = canvas.getBoundingClientRect();
+  const px = cr.left + (me.x / W) * cr.width;
+  const py = cr.top + ((me.y - 30) / H) * cr.height;
+  for (const el of document.querySelectorAll(".hud-card")) {
+    const r = el.getBoundingClientRect();
+    el.classList.toggle("faded", px > r.left - 20 && px < r.right + 20 && py > r.top - 30 && py < r.bottom + 40);
+  }
 
   // --- 효과들 ---
   floaters = floaters.filter((f) => (f.life -= dt) > 0);

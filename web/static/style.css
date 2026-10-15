@@ -99,7 +99,9 @@ kbd {
 .periods i.now { background: var(--ok); box-shadow: 0 0 6px var(--ok); }
 .periods i.swap { outline: 1px dashed var(--danger); outline-offset: 1px; }
 
-.role { display: flex; align-items: center; gap: 0.5em; text-align: right; min-width: 12em; transition: transform 0.3s; }
+.role { display: flex; align-items: center; gap: 0.5em; text-align: right; min-width: 12em; transition: transform 0.3s, opacity 0.25s; }
+.hud-card { transition: opacity 0.25s; }
+.hud-card.faded { opacity: 0.22; }   /* 캐릭터가 뒤에 있으면 반투명 */
 .role-face { width: 3.6em; height: 3.6em; border-radius: 50%; background: radial-gradient(circle at 50% 35%, #fff6e6, #ffd9ec); border: 2px solid #ffffff55; }
 .role.future .role-face { background: radial-gradient(circle at 50% 35%, #fff6e6, #d6e4ff); border-color: var(--gold); }
 .friends { margin-top: 0.25em; font-size: 0.8em; color: #ffb3d6; }
