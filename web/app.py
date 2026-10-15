@@ -1,40 +1,49 @@
 # =============================================================
-# 미래의 나와 하루 학교  -  웹 게임 백엔드 (app.py)
+# 미래의 나와 은하제까지 14일  -  웹 게임 백엔드 (app.py)
 # -------------------------------------------------------------
 # 백엔드(back-end) : 화면 뒤에서 "규칙 계산, 점수 저장"을 맡는 프로그램.
-# 프론트엔드(front-end) : 브라우저에 보이는 게임 화면 (index.html, style.css, game.js).
+# 프론트엔드(front-end) : 브라우저에 보이는 게임 화면 (index.html, game.js 등).
 # 둘은 "API" 라는 정해진 주소로 대화한다.
-#   브라우저 → "도서관에서 공부하기 했어요" → 서버(app.py)
-#   서버     → "점수가 이렇게 바뀌었어요"    → 브라우저
 #
-# 캐릭터 이동·그림·효과음은 브라우저(game.js)가,
-# 점수·역할·되돌리기 같은 "게임 규칙"은 전부 서버(이 파일)가 결정한다.
+# 이 파일이 정하는 규칙
+#   - 14일 × 하루 5교시. 교시마다 행동하거나 히로인과 이벤트를 보면 시간이 흐른다.
+#   - 히로인 5명의 호감도, 공략 이벤트 12개, 선택지 효과, 엔딩 판정
+#   - ★ 돌발 상황 : 매일 3교시에 주인공과 미래의 나의 역할이 바뀌고, 4교시에 돌아온다.
+#     역할마다 할 수 있는 행동이 다르다 (학생 = 연애 이벤트, 미래의 나 = 힌트).
 #
+# 대사(대본)는 static/story/*.json 에 있고, 여기서는 그 파일을 읽어 조건만 검사한다.
 # 실행 :  python app.py   →  브라우저에서 http://127.0.0.1:5000 열기
 # =============================================================
 
-import copy  # copy.deepcopy : 딕셔너리를 "통째로 복사" (되돌리기용 저장에 필요)
+import copy   # copy.deepcopy : 딕셔너리를 통째로 복사 (되돌리기용)
+import json   # json : 대본 파일(.json)과 세이브 파일을 읽고 쓰는 도구
+from pathlib import Path
 
-# Flask : 파이썬으로 웹 서버를 쉽게 만드는 도구 (pip install flask 로 설치)
-#   jsonify         : 파이썬 딕셔너리를 브라우저가 읽는 JSON 글자로 바꿔 줌
-#   request         : 브라우저가 보낸 내용을 꺼낼 때 사용
-#   render_template : templates 폴더의 html 파일을 보여 줌
 from flask import Flask, jsonify, request, render_template
 
-# __name__ : "지금 이 파일"이라는 뜻. Flask가 templates, static 폴더를 찾는 기준이 됨
 app = Flask(__name__)
+HERE = Path(__file__).parent
+STORY_DIR = HERE / "static" / "story"
+SAVE_FILE = HERE / "save.json"     # 진행 상황 자동 저장 파일
 
 
 # -------------------------------------------------------------
-# 1) 게임 데이터 (규칙) - 숫자만 바꾸면 게임 밸런스가 바뀐다
+# 1) 게임 규칙 숫자 - 여기만 바꾸면 밸런스가 바뀐다
+#    (웹 공개 버전 static/local-api.js 에도 같은 숫자가 있으니 함께 바꿀 것)
 # -------------------------------------------------------------
+MAX_DAY = 14        # 은하제까지 14일
+MAX_TURN = 5        # 하루 5교시
+SWAP_TURN = 3       # 3교시 = 역할이 바뀌는 시간
+TIRED_LIMIT = 10    # 행동 후 체력이 이보다 낮아지면 못 함
+PLACE_BONUS = 5     # 장소 보너스
+EVENT_BONUS = 3     # 이벤트를 끝까지 보면 기본 호감도
+CHAT_BONUS = 1      # 그날 처음 잡담하면 호감도
+SIDE_BONUS = 2      # 도윤·선생님과 그날 처음 대화하면 능력치
+NIGHT_REST = 20     # 밤에 자고 나면 체력 회복
+ENDING_AFF = 60     # 히로인 엔딩에 필요한 호감도 (+ 이벤트 12개 모두)
+HEROINE_IDS = ["seorin", "yuri", "bom", "hayul", "sion"]
+SIDE_NPCS = {"doyun": "우정", "kim": "성적", "han": "체력"}
 
-MAX_TURN = 5      # 하루 = 5교시
-SWAP_TURN = 3     # 3교시가 시작될 때 돌발 상황(역할 바뀜)이 일어남
-TIRED_LIMIT = 10  # 행동 후 체력이 이 값보다 낮아지면 "너무 피곤해서" 못 함
-PLACE_BONUS = 5   # 장소와 어울리는 점수에 붙는 보너스
-
-# 장소 : 그림(emoji)과 보너스 점수 종류
 PLACES = {
     "교실":   {"emoji": "🏫", "bonus": "성적"},
     "도서관": {"emoji": "📚", "bonus": "성적"},
@@ -44,61 +53,45 @@ PLACES = {
 }
 
 # 역할(role)마다 할 수 있는 행동이 다르다  ← 돌발 상황 해결의 핵심!
-#   effect : 점수 변화
-#   say    : 행동한 캐릭터의 말
-#   reply  : 상대 캐릭터의 대답
 ROLES = {
     "student": {
         "name": "학생 (현재의 나)",
         "actions": {
-            "공부하기":  {"effect": {"체력": -12, "성적": 15},
-                         "say": "수학 문제 다 풀었다!",
+            "공부하기":  {"effect": {"체력": -12, "성적": 15}, "say": "수학 문제 다 풀었다!",
                          "reply": "그때 공부한 게 나중에 진짜 도움 돼!"},
-            "친구 돕기": {"effect": {"체력": -5, "우정": 15},
-                         "say": "괜찮아? 내가 같이 해 줄게.",
+            "친구 돕기": {"effect": {"체력": -5, "우정": 15}, "say": "괜찮아? 내가 같이 해 줄게.",
                          "reply": "그 친구, 10년 뒤에도 연락하는 사이야."},
-            "쉬기":      {"effect": {"체력": 15, "성적": -5},
-                         "say": "잠깐 눈 좀 붙이자… zzz",
+            "쉬기":      {"effect": {"체력": 15, "성적": -5}, "say": "잠깐 눈 좀 붙이자… zzz",
                          "reply": "쉬는 것도 실력이야. 잘했어."},
         },
     },
     "future": {
         "name": "미래의 나 (10년 후)",
         "actions": {
-            "힌트 주기": {"effect": {"성적": 10},
-                         "say": "이번 시험엔 3단원이 꼭 나와!",
+            "힌트 주기": {"effect": {"성적": 10}, "say": "이번 시험엔 3단원이 꼭 나와!",
                          "reply": "헐, 미래에서 온 힌트다!"},
-            "응원하기":  {"effect": {"체력": 10, "우정": 5},
-                         "say": "넌 생각보다 훨씬 잘하고 있어.",
+            "응원하기":  {"effect": {"체력": 10, "우정": 5}, "say": "넌 생각보다 훨씬 잘하고 있어.",
                          "reply": "고마워… 힘이 난다!"},
-            "경고하기":  {"effect": {"성적": 5, "체력": -5},
-                         "say": "그거 미루면 나중에 후회해!",
+            "경고하기":  {"effect": {"성적": 5, "체력": -5}, "say": "그거 미루면 나중에 후회해!",
                          "reply": "으… 알았어, 지금 할게."},
         },
     },
 }
 
-# 학교 친구들(NPC) : 하루에 한 번 대화하면 그 친구와 관련된 점수 +3
-TALK_BONUS = 3
-NPCS = {
-    "서아": "우정",       # 반장
-    "하린": "우정",       # 응원단
-    "도윤": "우정",       # 급식왕
-    "유나": "성적",       # 도서부
-    "태오": "체력",       # 축구부
-    "김선생님": "성적",   # 담임
-    "한선생님": "체력",   # 보건 선생님
-}
-
-# 하루가 끝났을 때 가장 높은 점수에 따라 엔딩이 달라짐
-ENDINGS = {
-    "체력": "💪 \"덕분에 지금도 매일 아침 달리기를 해. 건강한 어른이 됐어!\"",
-    "성적": "📚 \"그날의 공부가 쌓여서 꿈꾸던 일을 하고 있어!\"",
-    "우정": "🤝 \"그때 도와준 친구들이 지금도 내 곁에 있어!\"",
-}
-
-# 세 점수의 합으로 등급을 매김 (위에서부터 먼저 맞는 것)
 GRADES = [(240, "S"), (215, "A"), (190, "B"), (0, "C")]
+
+
+def load_heroines():
+    """static/story 의 히로인 대본을 읽는다. 아직 없는 파일은 건너뛴다."""
+    found = {}
+    for hid in HEROINE_IDS:
+        path = STORY_DIR / f"{hid}.json"
+        if path.exists():
+            found[hid] = json.loads(path.read_text(encoding="utf-8"))
+    return found
+
+
+HEROINES = load_heroines()
 
 
 # -------------------------------------------------------------
@@ -106,225 +99,352 @@ GRADES = [(240, "S"), (215, "A"), (190, "B"), (0, "C")]
 # -------------------------------------------------------------
 
 def new_state():
-    """처음 시작할 때의 상태를 새로 만들어 돌려준다."""
+    """새 게임의 처음 상태"""
     return {
-        "stats": {"체력": 50, "성적": 50, "우정": 50},
+        "name": "",                                   # 주인공 이름 (시작 화면에서 입력)
+        "intro_done": False,                          # 프롤로그를 봤는지
+        "day": 1,
         "turn": 1,
-        "role": "student",      # 지금 내가 조종하는 역할
-        "fix_on": True,         # 돌발 상황 '해결 기능' 켜짐/꺼짐 (시연용)
-        "swap_done": False,     # 3교시 자동 역할 바뀜이 이미 일어났는지
-        "talked": [],           # 오늘 이미 대화한 친구 목록
-        "alert": "",            # 화면에 잠깐 띄울 알림 문구
+        "role": "student",
+        "fix_on": True,                               # 돌발 상황 '해결 기능' (시연용 스위치)
+        "stats": {"체력": 50, "성적": 50, "우정": 50},
+        "aff": {h: 0 for h in HEROINE_IDS},           # 히로인별 호감도 0~100
+        "done": {h: [] for h in HEROINE_IDS},         # 히로인별로 본 이벤트 id 목록
+        "chat_n": {h: 0 for h in HEROINE_IDS},        # 잡담을 몇 번 했는지 (다음 잡담 고르기용)
+        "today": {"met": [], "event": [], "side": []},  # 오늘 이미 한 것 (하루 한 번 제한)
+        "pending": None,                              # 지금 보고 있는 이벤트 (끝나면 확인용)
+        "ended": False,
+        "ending": None,
+        "alert": "",
         "talk": {"student": "오늘도 학교 가자!", "future": "내가 옆에서 도와줄게."},
-        "log": ["🌅 아침 등교! 빛나는 곳이나 친구 앞에서 Space를 눌러 보세요."],
+        "log": ["🌅 1일째 아침. 은하제까지 14일!"],
     }
 
 
-state = new_state()
-history = []  # 행동하기 전 상태를 차곡차곡 쌓아 두는 곳 (되돌리기용)
+def load_save():
+    """저장 파일이 있으면 이어서, 없거나 망가졌으면 새 게임"""
+    try:
+        data = json.loads(SAVE_FILE.read_text(encoding="utf-8"))
+        base = new_state()
+        base.update(data["state"])                    # 새로 생긴 칸은 기본값 유지
+        return base, data.get("history", [])
+    except (OSError, ValueError, KeyError, TypeError):
+        return new_state(), []
+
+
+state, history = load_save()
+
+
+def save():
+    """진행 상황을 파일에 저장 (게임을 껐다 켜도 이어서 할 수 있게)"""
+    try:
+        SAVE_FILE.write_text(json.dumps({"state": state, "history": history[-30:]}, ensure_ascii=False),
+                             encoding="utf-8")
+    except OSError:
+        pass   # 저장에 실패해도 게임은 계속
 
 
 def save_history():
-    """지금 상태를 복사해서 history에 쌓는다. (deepcopy : 안쪽 딕셔너리까지 통째로 복사)"""
     history.append(copy.deepcopy(state))
+    del history[:-50]          # 되돌리기는 최근 50번까지만 기억
 
 
 def clamp(value):
-    """점수가 0~100 사이를 넘지 않게 한다."""
     return max(0, min(100, value))
 
 
 def other_role(role):
-    """student ↔ future 반대 역할 이름을 돌려준다."""
     return "future" if role == "student" else "student"
+
+
+def log(text):
+    state["log"].append(text)
+    state["log"] = state["log"][-60:]
 
 
 def swap_roles(reason):
     """돌발 상황 : 주인공의 역할을 서로 바꾼다."""
     state["role"] = other_role(state["role"])
     new_name = ROLES[state["role"]]["name"]
-    state["log"].append(f"🚨 {reason} 이제 나는 '{new_name}' 역할!")
+    log(f"🚨 {reason} 이제 나는 '{new_name}' 역할!")
     state["alert"] = f"역할 체인지! 이제 나는 {new_name}"
-    if state["role"] == "future":
-        state["talk"] = {"student": "어? 내가 왜 따라가고 있지…?", "future": "이번엔 네가 미래의 나야!"}
-    else:
-        state["talk"] = {"student": "휴, 원래대로 돌아왔다!", "future": "다시 내가 도와줄게."}
+
+
+def end_day():
+    """5교시가 끝나면 : 다음 날로 넘어가거나, 14일째면 엔딩을 정한다."""
+    if state["day"] >= MAX_DAY:
+        state["ended"] = True
+        state["ending"] = decide_ending()
+        log("🎆 은하제의 밤. 불꽃놀이가 시작된다.")
+        return
+    state["day"] += 1
+    state["turn"] = 1
+    state["role"] = "student"
+    state["today"] = {"met": [], "event": [], "side": []}
+    state["stats"]["체력"] = clamp(state["stats"]["체력"] + NIGHT_REST)
+    log(f"🌙 하루 끝. 푹 자고 체력 +{NIGHT_REST}")
+    log(f"🌅 {state['day']}일째 아침. 은하제까지 {MAX_DAY - state['day'] + 1}일!")
+
+
+def advance_turn():
+    """한 교시를 보낸다. 3교시엔 역할이 바뀌고 4교시엔 돌아온다.
+    돌려주는 값 : 무슨 일이 있었는지 (화면 연출용)"""
+    info = {"swap": None, "day_end": False}
+    state["turn"] += 1
+    if state["turn"] == SWAP_TURN and state["role"] == "student":
+        swap_roles("3교시 종이 울리자 회중시계가 지직거렸다!")
+        info["swap"] = "swap"
+    elif state["turn"] == SWAP_TURN + 1 and state["role"] == "future":
+        swap_roles("4교시 종소리와 함께 시간이 제자리로 돌아왔다.")
+        info["swap"] = "unswap"
+    if state["turn"] > MAX_TURN:
+        end_day()
+        info["day_end"] = True
+    return info
+
+
+def decide_ending():
+    """이벤트 12개를 모두 보고 호감도가 충분한 히로인 중 가장 높은 사람 → 그 히로인 엔딩.
+    아무도 없으면 가장 높은 능력치에 따른 노멀 엔딩."""
+    best = None
+    for h in HEROINES:
+        if len(state["done"][h]) >= len(HEROINES[h]["events"]) and state["aff"][h] >= ENDING_AFF:
+            if best is None or state["aff"][h] > state["aff"][best]:
+                best = h
+    if best:
+        return {"type": "heroine", "id": best}
+    stat = max(state["stats"], key=state["stats"].get)
+    return {"type": "normal", "stat": stat}
 
 
 def grade_of(stats):
-    """점수 합계로 등급(S/A/B/C)을 구한다."""
-    total = sum(stats.values())  # sum : 목록의 숫자를 모두 더함
+    total = sum(stats.values())
     for limit, grade in GRADES:
         if total >= limit:
             return grade
 
 
-def view(event=None):
-    """브라우저에 보낼 '화면용 정보'를 만든다.
-    event : 방금 무슨 일이 있었는지 (연출용) - 예) {"type": "act", ...}
-    """
-    role = state["role"]
+def next_event(hid):
+    """히로인의 다음 이벤트와, 볼 수 없다면 그 이유를 돌려준다."""
+    h = HEROINES[hid]
+    k = len(state["done"][hid])
+    if k >= len(h["events"]):
+        return None, "done"
+    e = h["events"][k]
+    if hid in state["today"]["event"]:
+        return None, "today"
+    if state["day"] < e["min_day"]:
+        return None, "day"
+    if state["aff"][hid] < e["min_aff"]:
+        return None, "aff"
+    for stat, need in e.get("need", {}).items():
+        if state["stats"][stat] < need:
+            return None, f"need:{stat}:{need}"
+    return e, None
 
-    # ★ 돌발 상황 해결 부분 ★
-    # 해결 기능이 켜져 있으면 → 현재 역할에 맞는 버튼만 보냄
-    # 꺼져 있으면(버그 재현)   → 역할이 바뀌어도 학생 버튼이 그대로 남음
+
+def choice_delta(lines, picks):
+    """이벤트 대사를 따라가며 고른 선택지(picks)의 호감도를 더한다. 잘못된 선택 번호면 None."""
+    total, i = 0, 0
+    for ln in lines:
+        if "choice" in ln:
+            if i >= len(picks) or not isinstance(picks[i], int) or not 0 <= picks[i] < len(ln["choice"]):
+                return None
+            total += ln["choice"][picks[i]]["aff"]
+            i += 1
+    return total if i == len(picks) else None
+
+
+def view(event=None):
+    """브라우저에 보낼 '화면용 정보'를 만든다."""
+    role = state["role"]
+    # ★ 돌발 상황 해결 : 해결 기능이 켜져 있으면 현재 역할에 맞는 버튼만 보낸다
     button_role = role if state["fix_on"] else "student"
     buttons = list(ROLES[button_role]["actions"])
-    # 메뉴에 "체력 -12 · 성적 +15" 처럼 미리보기를 띄우려고 효과도 같이 보냄
     action_info = {name: ROLES[button_role]["actions"][name]["effect"] for name in buttons}
-
-    ended = state["turn"] > MAX_TURN
-    ending = ""
-    if ended:
-        # max(딕셔너리, key=딕셔너리.get) : 값이 가장 큰 키를 찾음
-        best = max(state["stats"], key=state["stats"].get)
-        ending = ENDINGS[best]
-
-    # {**state, ...} : state의 내용을 그대로 펼쳐 넣고 몇 가지를 더 붙인 새 딕셔너리
+    save()
     return jsonify({
         **state,
         "role_name": ROLES[role]["name"],
         "buttons": buttons,
         "action_info": action_info,
-        "mismatch": (not state["fix_on"]) and role != "student",  # 버튼과 역할이 안 맞는 중인지
+        "mismatch": (not state["fix_on"]) and role != "student",
         "places": PLACES,
         "place_bonus": PLACE_BONUS,
         "max_turn": MAX_TURN,
+        "max_day": MAX_DAY,
+        "ending_aff": ENDING_AFF,
         "can_undo": len(history) > 0,
-        "ended": ended,
-        "ending": ending,
         "grade": grade_of(state["stats"]),
         "event": event,
     })
 
 
 def blocked(message):
-    """행동을 막고 이유를 알려 준다. (점수는 바뀌지 않음)"""
     state["alert"] = message
     return view({"type": "blocked"})
 
 
+def body():
+    """브라우저가 보낸 JSON. 이상한 요청이면 빈 딕셔너리"""
+    return request.get_json(silent=True) or {}
+
+
 # -------------------------------------------------------------
-# 3) API 주소들 : 브라우저가 이 주소로 요청을 보낸다
-#    @app.get / @app.post : "이 주소로 요청이 오면 아래 함수를 실행해"
-#    GET  = 정보 달라고 할 때,  POST = 무언가 바꿔 달라고 할 때
+# 3) API 주소들
 # -------------------------------------------------------------
 
 @app.get("/")
 def home():
-    """첫 화면 : templates/index.html 을 보여 준다."""
     return render_template("index.html")
 
 
 @app.get("/api/state")
 def get_state():
-    """현재 상태 보기"""
     return view()
+
+
+@app.post("/api/name")
+def set_name():
+    """주인공 이름 정하기 (최대 8글자, 비우면 '한웅')"""
+    name = str(body().get("name", "")).strip()[:8] or "한웅"
+    state["name"] = name
+    return view({"type": "name"})
+
+
+@app.post("/api/intro")
+def intro_done():
+    state["intro_done"] = True
+    return view({"type": "intro"})
 
 
 @app.post("/api/act")
 def act():
-    """기능 1+2 : 캐릭터가 서 있는 장소에서 행동하고 점수를 바꾼다."""
-    # silent=True : 이상한 요청이 와도 오류 대신 None 을 돌려줌 → or {} 로 빈 딕셔너리 처리
-    data = request.get_json(silent=True) or {}
-    place = data.get("place")
-    action = data.get("action")
+    """장소의 빛나는 곳에서 행동 → 능력치가 바뀌고 한 교시가 지난다."""
+    data = body()
+    place, action = data.get("place"), data.get("action")
     state["alert"] = ""
-
-    if state["turn"] > MAX_TURN:
-        return blocked("오늘 수업은 모두 끝났어요. R 키로 다시 시작!")
+    if state["ended"]:
+        return blocked("은하제가 끝났어요. 새 게임으로 다시 시작!")
     if place not in PLACES:
         return blocked("교실·도서관 같은 장소 안에서만 행동할 수 있어요.")
 
     role = state["role"]
-    my_actions = ROLES[role]["actions"]
-
-    if action in my_actions:
-        info = my_actions[action]
-        bug = False
-    elif state["fix_on"]:
-        # ★ 해결 : 서버도 한 번 더 검사해서 역할에 안 맞는 행동은 막는다
-        return blocked(f"⛔ 지금 역할({ROLES[role]['name']})은 '{action}'을(를) 할 수 없어요.")
-    else:
-        # ✗ 버그 재현 : 검사 없이 다른 역할의 행동이 실행돼 버림
-        info = ROLES[other_role(role)]["actions"].get(action)
+    info = ROLES[role]["actions"].get(action)
+    bug = False
+    if info is None:
+        if state["fix_on"]:
+            # ★ 해결 : 서버도 한 번 더 검사해서 역할에 안 맞는 행동은 막는다
+            return blocked(f"⛔ 지금 역할({ROLES[role]['name']})은 '{action}'을(를) 할 수 없어요.")
+        info = ROLES[other_role(role)]["actions"].get(action)   # ✗ 버그 재현
         if info is None:
             return blocked("알 수 없는 행동이에요.")
         bug = True
 
-    # 피로 규칙 : 체력이 너무 떨어지는 행동은 못 함 → 쉬거나 체력 장소로 가야 함
-    hp_change = info["effect"].get("체력", 0)  # .get(키, 기본값) : 키가 없으면 0
-    if hp_change < 0 and state["stats"]["체력"] + hp_change < TIRED_LIMIT:
+    hp = info["effect"].get("체력", 0)
+    if hp < 0 and state["stats"]["체력"] + hp < TIRED_LIMIT:
         return blocked("😵 너무 피곤해요! 쉬기를 하거나 운동장·보건실에서 체력을 채우세요.")
 
-    save_history()  # 바꾸기 직전 상태를 저장해 둬야 되돌리기가 가능
-    before = dict(state["stats"])  # 바뀌기 전 점수 (얼마나 변했는지 계산용)
-
-    # 점수 바꾸기 : 행동 효과 + 장소 보너스
+    save_history()
+    before = dict(state["stats"])
     for stat, amount in info["effect"].items():
         state["stats"][stat] = clamp(state["stats"][stat] + amount)
     bonus = PLACES[place]["bonus"]
     state["stats"][bonus] = clamp(state["stats"][bonus] + PLACE_BONUS)
-
-    # 실제로 변한 양 (0~100 제한 때문에 효과와 다를 수 있음)
     delta = {k: state["stats"][k] - before[k] for k in before if state["stats"][k] != before[k]}
 
-    # 캐릭터 대사 : 행동한 쪽이 say, 상대가 reply
-    say, reply = info["say"], info["reply"]
+    reply = "어?! 그건 내가 할 일인데?!" if bug else info["reply"]
+    state["talk"] = {role: info["say"], other_role(role): reply}
+    log(f"[{state['day']}일 {state['turn']}교시] {PLACES[place]['emoji']} {place}에서 '{action}'")
     if bug:
-        reply = "어?! 그건 내가 할 일인데?!"
-    state["talk"] = {role: say, other_role(role): reply}
-    state["log"].append(f"[{state['turn']}교시] {PLACES[place]['emoji']} {place}에서 "
-                        f"'{action}' ({ROLES[role]['name']}) → {bonus} 보너스 +{PLACE_BONUS}")
-    if bug:
-        state["log"].append(f"⚠️ 버그! {ROLES[role]['name']} 역할인데 학생 버튼 '{action}'이 눌렸어요.")
+        log(f"⚠️ 버그! {ROLES[role]['name']} 역할인데 학생 행동 '{action}'이 실행됐어요.")
         state["alert"] = "⚠️ 버그 재현: 역할은 바뀌었는데 버튼이 그대로예요!"
-
-    state["turn"] += 1
-
-    # 돌발 상황 : 3교시가 시작될 때 한 번 자동으로 역할이 바뀜
-    swapped = False
-    if state["turn"] == SWAP_TURN and not state["swap_done"]:
-        state["swap_done"] = True
-        swap_roles("쉬는 시간 종이 울리자 몸이 뒤바뀌었다!")
-        swapped = True
-
-    if state["turn"] > MAX_TURN:
-        state["log"].append("🔔 하루 끝! 엔딩을 확인하세요.")
-
-    state["log"] = state["log"][-40:]  # 기록은 최근 40줄만 남김
-    return view({"type": "act", "actor": role, "action": action, "say": say,
-                 "reply": reply, "delta": delta, "bug": bug, "swapped": swapped})
+    turn_info = advance_turn()
+    return view({"type": "act", "actor": role, "action": action, "say": info["say"],
+                 "reply": reply, "delta": delta, "bug": bug, **turn_info})
 
 
-@app.post("/api/talk")
-def talk():
-    """친구(NPC)와 대화 : 하루에 한 번만 점수 보너스. 교시(턴)는 지나가지 않는다."""
-    data = request.get_json(silent=True) or {}
-    npc = data.get("npc")
+@app.post("/api/meet")
+def meet():
+    """히로인이나 도윤·선생님에게 말 걸기 → 무엇을 볼지 정해 준다.
+    kind : event(공략 이벤트) | chat(잡담) | hint(미래의 나 힌트) | side(조연 잡담)"""
+    who = body().get("who")
     state["alert"] = ""
-    if npc not in NPCS:
-        return blocked("그런 친구는 없어요.")
+    if state["ended"]:
+        return blocked("은하제가 끝났어요.")
 
-    first = npc not in state["talked"] and state["turn"] <= MAX_TURN
-    delta = {}
-    if first:
-        save_history()                      # 점수가 바뀌니까 되돌리기용으로 저장
-        stat = NPCS[npc]
-        before = state["stats"][stat]
-        state["stats"][stat] = clamp(before + TALK_BONUS)
-        delta = {stat: state["stats"][stat] - before}
-        state["talked"].append(npc)
-        state["log"].append(f"💬 {npc}와(과) 이야기했다 → {stat} +{TALK_BONUS}")
-    return view({"type": "talk", "npc": npc, "first": first, "delta": delta})
+    if who in SIDE_NPCS:
+        first = who not in state["today"]["side"]
+        delta = {}
+        if first:
+            save_history()
+            stat = SIDE_NPCS[who]
+            before = state["stats"][stat]
+            state["stats"][stat] = clamp(before + SIDE_BONUS)
+            delta = {stat: state["stats"][stat] - before}
+            state["today"]["side"].append(who)
+        return view({"type": "meet", "kind": "side", "who": who, "idx": state["day"] * 3 + state["turn"],
+                     "delta": delta})
+
+    if who not in HEROINES:
+        return blocked("지금은 만날 수 없어요.")
+
+    # ★ 돌발 상황 해결 : 미래의 나 역할일 때는 연애 이벤트 대신 힌트만
+    if state["role"] == "future" and state["fix_on"]:
+        return view({"type": "meet", "kind": "hint", "who": who,
+                     "idx": state["day"] % len(HEROINES[who]["hints"])})
+
+    e, reason = next_event(who)
+    if e:
+        state["pending"] = {"who": who, "id": e["id"]}
+        return view({"type": "meet", "kind": "event", "who": who, "id": e["id"],
+                     "bug": state["role"] == "future"})
+
+    # 이벤트가 없으면 잡담 (그날 처음이면 호감도 +1)
+    idx = state["chat_n"][who] % len(HEROINES[who]["chat"])
+    state["chat_n"][who] += 1
+    delta = 0
+    if who not in state["today"]["met"]:
+        save_history()
+        state["today"]["met"].append(who)
+        state["aff"][who] = clamp(state["aff"][who] + CHAT_BONUS)
+        delta = CHAT_BONUS
+    return view({"type": "meet", "kind": "chat", "who": who, "idx": idx, "aff": delta, "reason": reason})
+
+
+@app.post("/api/event")
+def event_done():
+    """공략 이벤트를 끝까지 봤을 때 : 고른 선택지로 호감도를 바꾸고 한 교시가 지난다."""
+    data = body()
+    who, eid, picks = data.get("who"), data.get("id"), data.get("choices", [])
+    p = state["pending"]
+    if not p or p["who"] != who or p["id"] != eid:
+        return blocked("이벤트 정보가 맞지 않아요.")
+    e = next((x for x in HEROINES[who]["events"] if x["id"] == eid), None)
+    gained = choice_delta(e["lines"], picks) if e else None
+    if gained is None:
+        return blocked("선택지 정보가 이상해요.")
+
+    save_history()
+    gained += EVENT_BONUS
+    before = state["aff"][who]
+    state["aff"][who] = clamp(before + gained)
+    state["done"][who].append(eid)
+    state["today"]["event"].append(who)
+    state["today"]["met"].append(who)
+    state["pending"] = None
+    log(f"💗 [{state['day']}일 {state['turn']}교시] {HEROINES[who]['short']} 이벤트 「{e['title']}」 "
+        f"호감도 {'+' if gained >= 0 else ''}{state['aff'][who] - before}")
+    turn_info = advance_turn()
+    return view({"type": "event_done", "who": who, "aff": state["aff"][who] - before, **turn_info})
 
 
 @app.post("/api/swap")
 def swap():
     """돌발 상황 재현 버튼 : 언제든 역할을 직접 바꿔 볼 수 있다."""
     state["alert"] = ""
-    if state["turn"] > MAX_TURN:
-        return blocked("하루가 끝났어요. R 키로 다시 시작!")
+    if state["ended"]:
+        return blocked("은하제가 끝났어요.")
     save_history()
     swap_roles("[역할 바꾸기]로 역할이 뒤바뀌었다!")
     return view({"type": "swap"})
@@ -332,46 +452,35 @@ def swap():
 
 @app.post("/api/undo")
 def undo():
-    """기능 3-1 : 바로 전 상태로 되돌린다."""
     if not history:
         return blocked("더 되돌릴 기록이 없어요.")
-    # state = ... 로 새로 만들면 다른 함수가 보는 state와 달라지므로
-    # 안의 내용만 비우고(clear) 옛 내용으로 채운다(update)
     state.clear()
-    state.update(history.pop())  # pop() : 리스트 맨 끝 하나를 꺼내면서 지움
+    state.update(history.pop())
     state["alert"] = "↩ 한 단계 되돌렸어요."
     return view({"type": "undo"})
 
 
 @app.post("/api/reset")
 def reset():
-    """기능 3-2 : 처음부터 다시 시작 (해결 기능 켜짐/꺼짐 설정은 유지)"""
-    fix_on = state["fix_on"]
+    """새 게임 (이름과 해결 기능 설정은 유지)"""
+    keep = {"name": state["name"], "fix_on": state["fix_on"]}
     state.clear()
     state.update(new_state())
-    state["fix_on"] = fix_on
+    state.update(keep)
     history.clear()
     return view({"type": "reset"})
 
 
 @app.post("/api/fix")
 def set_fix():
-    """시연용 스위치 : 돌발 상황 '해결 기능'을 켜고 끈다."""
-    data = request.get_json(silent=True) or {}
-    on = bool(data.get("on"))
+    on = bool(body().get("on"))
     state["fix_on"] = on
     state["alert"] = "✅ 해결 기능 켜짐 : 역할에 맞는 행동만 나와요." if on \
-        else "⚠️ 해결 기능 꺼짐 : 역할이 바뀌어도 행동 목록이 안 바뀌어요. (버그 재현)"
-    state["log"].append(state["alert"])
+        else "⚠️ 해결 기능 꺼짐 : 역할이 바뀌어도 행동이 안 바뀌어요. (버그 재현)"
+    log(state["alert"])
     return view({"type": "fix"})
 
 
-# -------------------------------------------------------------
-# 4) 서버 켜기
-#    if __name__ == "__main__" : 이 파일을 직접 실행했을 때만 아래를 실행
-#    (바탕화면의 한웅.py 처럼 다른 파일이 import 할 때는 실행되지 않음)
-#    debug=True : 코드를 고치면 서버가 자동으로 다시 켜지고, 오류를 자세히 보여 줌
-# -------------------------------------------------------------
 if __name__ == "__main__":
     print("브라우저에서 http://127.0.0.1:5000 을 열어 주세요. (끄기: Ctrl + C)")
     app.run(debug=True)

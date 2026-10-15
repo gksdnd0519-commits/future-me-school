@@ -1,0 +1,2761 @@
+{
+ "prologue": [
+  {
+   "who": "narr",
+   "text": "9월의 첫날 아침. 알람이 세 번째로 울리고 나서야 눈이 떠졌다."
+  },
+  {
+   "who": "me",
+   "expr": "normal",
+   "text": "(으으… 개학이다. 방학이 끝나 버렸어.)"
+  },
+  {
+   "who": "narr",
+   "text": "책상 위에서 무언가가 반짝였다. 할아버지가 남겨 주신 낡은 회중시계였다."
+  },
+  {
+   "who": "me",
+   "expr": "surprised",
+   "text": "(어? 저 시계, 몇 년째 멈춰 있었는데…)"
+  },
+  {
+   "who": "narr",
+   "text": "째깍. 째깍. 멈춰 있던 초침이 혼자 움직이기 시작했다."
+  },
+  {
+   "who": "narr",
+   "text": "시계에서 새어 나온 빛이 방 안을 하얗게 물들였다."
+  },
+  {
+   "who": "me",
+   "expr": "surprised",
+   "text": "으악! 뭐, 뭐야 이거?!"
+  },
+  {
+   "who": "narr",
+   "text": "빛이 잦아들자, 방 한가운데에 낯선 어른이 서 있었다."
+  },
+  {
+   "who": "narr",
+   "text": "정장 차림. 조금 피곤해 보이는 눈. 그런데 어딘가 낯이 익은 얼굴."
+  },
+  {
+   "who": "future",
+   "expr": "happy",
+   "text": "…와. 진짜 됐네. 안녕, 열일곱 살의 나."
+  },
+  {
+   "who": "me",
+   "expr": "angry",
+   "text": "누, 누구세요! 도둑이면 경찰 부를 거예요!"
+  },
+  {
+   "who": "future",
+   "expr": "tired",
+   "text": "도둑이 이렇게 정장 입고 오겠냐. 나야, 나. {name}."
+  },
+  {
+   "who": "me",
+   "expr": "surprised",
+   "text": "무슨 소리예요. {name}은 저거든요?"
+  },
+  {
+   "who": "future",
+   "expr": "normal",
+   "text": "그러니까. 10년 뒤의 너. 스물일곱 살 회사원 {name}."
+  },
+  {
+   "who": "me",
+   "expr": "tired",
+   "text": "(아침부터 이상한 꿈을 꾸나 보다. 다시 자자.)"
+  },
+  {
+   "who": "future",
+   "expr": "angry",
+   "text": "야, 이불 덮지 마. 증명해 줄게."
+  },
+  {
+   "who": "future",
+   "expr": "normal",
+   "text": "초등학교 4학년 때, 침대 밑에 숨긴 시험지. 58점."
+  },
+  {
+   "who": "me",
+   "expr": "surprised",
+   "text": "…!"
+  },
+  {
+   "who": "future",
+   "expr": "normal",
+   "text": "엄마한테는 '선생님이 아직 안 나눠 줬다'고 했지."
+  },
+  {
+   "who": "future",
+   "expr": "happy",
+   "text": "그거 아직 그 자리에 있다. 상자 안에. 고양이 스티커 붙은 거."
+  },
+  {
+   "who": "me",
+   "expr": "blush",
+   "text": "그, 그건 아무한테도 말 안 했는데…!"
+  },
+  {
+   "who": "future",
+   "expr": "happy",
+   "text": "당연하지. 나만 아니까. 아니, 우리만 아니까."
+  },
+  {
+   "who": "me",
+   "expr": "tired",
+   "text": "…그래도 못 믿겠어요. 하나만 더."
+  },
+  {
+   "who": "future",
+   "expr": "normal",
+   "text": "좋아. 그럼 이건 어때. 세상에서 가장 착한 사자는?"
+  },
+  {
+   "who": "me",
+   "expr": "normal",
+   "text": "…네?"
+  },
+  {
+   "who": "future",
+   "expr": "happy",
+   "text": "자원봉사자. 하하."
+  },
+  {
+   "who": "narr",
+   "text": "방 안에 싸늘한 정적이 흘렀다."
+  },
+  {
+   "who": "me",
+   "expr": "tired",
+   "text": "(…이 썰렁함. 틀림없다. 이 사람, 나다.)"
+  },
+  {
+   "who": "me",
+   "expr": "tired",
+   "text": "알았어요. 믿을게요. 믿고 싶진 않지만."
+  },
+  {
+   "who": "future",
+   "expr": "happy",
+   "text": "반말해. 너한테 존댓말 듣는 거 이상하다."
+  },
+  {
+   "who": "me",
+   "expr": "normal",
+   "text": "그럼… 왜 온 거야? 미래에서 무슨 일 있어?"
+  },
+  {
+   "who": "narr",
+   "text": "미래의 나는 잠시 창밖을 보았다. 웃음기가 조금 옅어졌다."
+  },
+  {
+   "who": "future",
+   "expr": "normal",
+   "text": "14일 뒤에 은하제 하잖아. 마지막 날 밤에 불꽃놀이."
+  },
+  {
+   "who": "future",
+   "expr": "sad",
+   "text": "그날, 나는 좋아하는 사람한테 마음을 전하지 못했어."
+  },
+  {
+   "who": "future",
+   "expr": "sad",
+   "text": "말할 기회는 있었는데. 입을 열려다가… 그냥 삼켰지."
+  },
+  {
+   "who": "future",
+   "expr": "normal",
+   "text": "그게 10년 동안 계속 마음에 걸리더라."
+  },
+  {
+   "who": "me",
+   "expr": "surprised",
+   "text": "좋아하는 사람? 누군데?"
+  },
+  {
+   "who": "future",
+   "expr": "happy",
+   "text": "그건 비밀."
+  },
+  {
+   "who": "me",
+   "expr": "angry",
+   "text": "여기까지 와서 비밀이 어디 있어!"
+  },
+  {
+   "who": "future",
+   "expr": "normal",
+   "text": "진짜로. 그건 네가 정하는 거야. 내가 정하면 안 돼."
+  },
+  {
+   "who": "future",
+   "expr": "normal",
+   "text": "너는 후회하지 마. 그거 하나 말하러 왔어."
+  },
+  {
+   "who": "me",
+   "expr": "normal",
+   "text": "(…좋아하는 사람이라. 나한테 그런 사람이 생길까.)"
+  },
+  {
+   "who": "future",
+   "expr": "tired",
+   "text": "아, 그리고 하나 더. 이 시계가 좀 불안정하거든."
+  },
+  {
+   "who": "future",
+   "expr": "normal",
+   "text": "아마 매일 3교시쯤, 너랑 나랑 역할이 뒤바뀔 거야."
+  },
+  {
+   "who": "me",
+   "expr": "surprised",
+   "text": "역할이 바뀐다고? 그게 무슨…"
+  },
+  {
+   "who": "future",
+   "expr": "happy",
+   "text": "겪어 보면 알아. 자, 지각한다. 가자."
+  },
+  {
+   "who": "narr",
+   "text": "등굣길. 미래의 나는 아무렇지 않게 옆에서 걸었다."
+  },
+  {
+   "who": "narr",
+   "text": "은하고등학교 정문 앞. 누군가 뒤에서 내 어깨를 툭 쳤다."
+  },
+  {
+   "who": "doyun",
+   "expr": "happy",
+   "text": "{name}! 방학 잘 보냈냐! 나는 3킬로 쪘다!"
+  },
+  {
+   "who": "me",
+   "expr": "tired",
+   "text": "도윤아… 자랑이냐, 그게."
+  },
+  {
+   "who": "doyun",
+   "expr": "happy",
+   "text": "급식왕의 겨울잠 준비지. 아직 9월이지만."
+  },
+  {
+   "who": "doyun",
+   "expr": "normal",
+   "text": "그보다 들었냐? 이번 학기 은하제 준비 시작한대."
+  },
+  {
+   "who": "doyun",
+   "expr": "happy",
+   "text": "불꽃놀이 때 같이 있던 사람이랑 이어진다는 그 전설! 올해야말로다!"
+  },
+  {
+   "who": "doyun",
+   "expr": "normal",
+   "text": "도서부 서린이, 부회장 유리, 육상부 봄이, 요리부 하율 선배."
+  },
+  {
+   "who": "doyun",
+   "expr": "surprised",
+   "text": "아, 그리고 전학생! 시온이라는 애가 왔대. 별 좋아하는 신비 소녀래."
+  },
+  {
+   "who": "me",
+   "expr": "normal",
+   "text": "넌 그런 정보를 대체 어디서 듣는 거야."
+  },
+  {
+   "who": "doyun",
+   "expr": "happy",
+   "text": "급식 줄에서. 정보는 밥과 함께 흐르는 법이지."
+  },
+  {
+   "who": "narr",
+   "text": "교문 기둥 옆에서 미래의 나가 조용히 웃었다."
+  },
+  {
+   "who": "future",
+   "expr": "happy",
+   "text": "(…그래, 이 녀석이 있었지. 반갑다, 도윤아.)"
+  },
+  {
+   "who": "narr",
+   "text": "이렇게, 은하제까지의 14일이 시작되었다."
+  }
+ ],
+ "days": {
+  "1": {
+   "bg": "classroom",
+   "morning": [
+    {
+     "who": "narr",
+     "text": "교실은 방학 이야기로 시끌시끌했다."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "흠흠. 다들 자리에 앉아라. 개학 첫날부터 소란스럽구나."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "오늘부터 은하제 준비 기간이다. 2주 뒤가 축제야."
+    },
+    {
+     "who": "kim",
+     "expr": "angry",
+     "text": "그렇다고 공부를 놓으면 안 된다. 알겠지?"
+    },
+    {
+     "who": "doyun",
+     "expr": "happy",
+     "text": "선생님, 축제 때 급식 특식 나와요?"
+    },
+    {
+     "who": "kim",
+     "expr": "tired",
+     "text": "…도윤아. 질문이 그것뿐이냐."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "(창밖을 보니 미래의 나가 운동장 벤치에 앉아 있었다.)"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "(손을 흔든다. 들키면 어쩌려고…)"
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "하굣길. 노을이 길게 늘어졌다."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "어때. 첫날 소감은?"
+    },
+    {
+     "who": "me",
+     "expr": "tired",
+     "text": "정신없었어. 3교시에 진짜 몸이 바뀌었잖아."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "그치? 나도 놀랐다. 교복이 이렇게 가벼웠나 싶더라."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "그쪽은… 아니, 너는 회사 안 가도 돼?"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "휴가 냈어. 10년 만에 쓰는 진짜 휴가."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "이번 2주는 너만 보려고. 이상하게 들리겠지만."
+    },
+    {
+     "who": "me",
+     "expr": "blush",
+     "text": "(…이상하게 든든하네.)"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "그럼 오늘의 마무리 개그. 빵이 놀라면?"
+    },
+    {
+     "who": "me",
+     "expr": "tired",
+     "text": "…하지 마."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "깜빵. 하하하."
+    },
+    {
+     "who": "narr",
+     "text": "썰렁한 웃음소리가 노을 속으로 퍼졌다."
+    }
+   ]
+  },
+  "2": {
+   "bg": "classroom",
+   "morning": [
+    {
+     "who": "narr",
+     "text": "칠판에 '축제 담당 배정표'가 붙어 있었다."
+    },
+    {
+     "who": "doyun",
+     "expr": "surprised",
+     "text": "{name}, 너 무대 지원팀이다! 나는 먹거리 부스!"
+    },
+    {
+     "who": "doyun",
+     "expr": "happy",
+     "text": "하늘이 나에게 맞는 자리를 주셨구나."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "흠흠. 부서별로 학생회에 명단을 내도록."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "부회장 유리가 총괄이니 협조 잘해라."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "(무대 지원이라… 일이 많을 것 같은데.)"
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "(창문 너머에서 엄지를 들어 보인다. 무슨 뜻이야, 그거.)"
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "편의점 앞 벤치. 미래의 나는 삼각김밥을 신기한 듯 바라보았다."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "이거 아직 이 가격이야? 좋은 시절이다."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "미래엔 비싸?"
+    },
+    {
+     "who": "future",
+     "expr": "tired",
+     "text": "말도 마. 월급 빼고 다 올라."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "회사 생활은 어때?"
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "그럭저럭. 일은 익숙해졌는데, 퇴근하면 조용해."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "불 꺼진 방에 들어가면 가끔 이 시절 생각이 나."
+    },
+    {
+     "who": "me",
+     "expr": "sad",
+     "text": "…좀 쓸쓸하게 들린다."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "에이, 걱정 마. 친구들도 있고, 나름 잘 살아."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "그냥 가끔, '그때 말했으면 어땠을까' 싶을 뿐이야."
+    },
+    {
+     "who": "narr",
+     "text": "미래의 나는 김밥 포장을 엉뚱한 방향으로 뜯고 있었다."
+    }
+   ]
+  },
+  "3": {
+   "bg": "rain",
+   "morning": [
+    {
+     "who": "narr",
+     "text": "아침부터 비가 내렸다. 2학기 들어 처음 내리는 비였다."
+    },
+    {
+     "who": "doyun",
+     "expr": "tired",
+     "text": "우산 깜빡했다… 머리가 미역 됐어."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "넌 매년 첫 비 오는 날 우산을 안 가져오더라."
+    },
+    {
+     "who": "doyun",
+     "expr": "happy",
+     "text": "전통이지. 지키는 맛이 있어."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "흠흠. 젖은 사람은 보건실 가서 수건 받아 와라. 감기 걸린다."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "(복도 창가에서 빗소리를 듣고 있다. 표정이 어딘가 그리워 보인다.)"
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "빗소리가 잦아든 밤. 미래의 나는 우산을 접으며 하늘을 봤다."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "비 오는 날의 학교, 좋았지. 냄새가 달라."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "오늘 3교시 때 뭐 했어? 복도에서 한참 서 있던데."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "그냥. 다 기억나서. 저 창틀 낙서도, 계단 삐걱거리는 소리도."
+    },
+    {
+     "who": "future",
+     "expr": "sad",
+     "text": "어른이 되면 이런 게 다 아무것도 아닌 줄 알았는데."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "막상 제일 그리운 건 이런 아무것도 아닌 것들이더라."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "…10년 뒤의 나는 생각보다 감성적이구나."
+    },
+    {
+     "who": "future",
+     "expr": "angry",
+     "text": "감성적인 게 아니라 철든 거야."
+    },
+    {
+     "who": "narr",
+     "text": "그 순간, 미래의 나의 손끝이 아주 잠깐 흐려 보였다."
+    },
+    {
+     "who": "me",
+     "expr": "surprised",
+     "text": "어? 방금…"
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "응? 왜. 비 때문에 잘못 봤겠지."
+    }
+   ]
+  },
+  "4": {
+   "bg": "hallway",
+   "morning": [
+    {
+     "who": "narr",
+     "text": "복도에 포스터 재료가 산더미처럼 쌓여 있었다."
+    },
+    {
+     "who": "doyun",
+     "expr": "happy",
+     "text": "{name}, 포스터에 내 얼굴 넣으면 관객 두 배다."
+    },
+    {
+     "who": "me",
+     "expr": "tired",
+     "text": "두 배로 도망가겠지."
+    },
+    {
+     "who": "doyun",
+     "expr": "angry",
+     "text": "이 자식이…! 의리 없는 놈."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "흠흠. 포스터는 맞춤법 검사 받고 붙여라. 국어 교사 반이다."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "(교문 앞에서 포스터를 구경하는 척하다가 선생님과 눈이 마주쳤다. 도망.)"
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "하굣길. 손가락 마디마다 물감이 묻어 있었다."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "오늘 포스터 잘 나왔더라. 네 글씨, 지금이 더 낫네."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "미래의 나는 글씨가 더 못해?"
+    },
+    {
+     "who": "future",
+     "expr": "tired",
+     "text": "타자만 치다 보니까 손글씨를 잊어버렸어."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "결재 서류에 이름 쓸 때만 펜을 잡지."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "어른은 다 그래?"
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "다는 아니겠지. 나는 좀 바쁘게만 살았어."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "그러니까 너는 지금 많이 그려 두고, 많이 웃어 둬."
+    },
+    {
+     "who": "me",
+     "expr": "happy",
+     "text": "그건 잔소리야, 조언이야?"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "미래에서 온 조언형 잔소리. 한정판이다."
+    }
+   ]
+  },
+  "5": {
+   "bg": "classroom",
+   "morning": [
+    {
+     "who": "narr",
+     "text": "반 회의 시간. 공기가 묘하게 날카로웠다."
+    },
+    {
+     "who": "doyun",
+     "expr": "angry",
+     "text": "그러니까 왜 먹거리 예산이 제일 적냐고!"
+    },
+    {
+     "who": "me",
+     "expr": "tired",
+     "text": "도윤아, 진정해. 무대 쪽도 모자라."
+    },
+    {
+     "who": "narr",
+     "text": "목소리가 점점 커지고, 결국 교실이 조용해졌다."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "흠흠. 다들 잠깐 숨 좀 돌리자."
+    },
+    {
+     "who": "kim",
+     "expr": "happy",
+     "text": "축제는 싸우려고 하는 게 아니라, 같이 웃으려고 하는 거다."
+    },
+    {
+     "who": "doyun",
+     "expr": "sad",
+     "text": "…미안. 내가 좀 흥분했다."
+    },
+    {
+     "who": "me",
+     "expr": "happy",
+     "text": "나도 미안. 같이 다시 나눠 보자."
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "운동장 스탠드. 미래의 나는 오늘따라 말이 적었다."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "오늘 회의, 잘 넘겼더라. 도윤이랑 먼저 화해하고."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "원래 금방 풀리는 사이야."
+    },
+    {
+     "who": "future",
+     "expr": "sad",
+     "text": "…나는 그때 화해를 미뤘어. 그러다 한동안 서먹했지."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "금방 풀릴 줄 알았던 게 제일 오래 가더라."
+    },
+    {
+     "who": "me",
+     "expr": "surprised",
+     "text": "미래에서도 도윤이랑 친구야?"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "당연하지. 걔 결혼식 사회도 내가 봤다."
+    },
+    {
+     "who": "me",
+     "expr": "surprised",
+     "text": "도윤이가 결혼을?!"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "스포일러는 여기까지."
+    },
+    {
+     "who": "me",
+     "expr": "angry",
+     "text": "궁금해서 잠 못 자겠잖아!"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "그게 미래에서 온 자의 특권이지."
+    }
+   ]
+  },
+  "6": {
+   "bg": "field",
+   "morning": [
+    {
+     "who": "narr",
+     "text": "주말인데도 학교에 나왔다. 운동장은 이상할 만큼 조용했다."
+    },
+    {
+     "who": "doyun",
+     "expr": "tired",
+     "text": "주말 등교… 내 늦잠 돌려줘…"
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "그래도 사람 없으니까 작업은 잘 되겠다."
+    },
+    {
+     "who": "doyun",
+     "expr": "happy",
+     "text": "매점 안 붐비는 건 좋네. 빵 독점이다."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "(텅 빈 운동장 한가운데서 미래의 나가 기지개를 켠다.)"
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "(…저 사람, 남들 눈에 진짜 수상해 보이겠다.)"
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "주말 저녁. 학교 앞 문구점 불빛만 켜져 있었다."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "조용한 학교도 나쁘지 않네."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "오늘은 3교시 때 어땠어? 사람이 별로 없었잖아."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "오히려 좋았어. 너희 반 교실에 몰래 앉아 봤다."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "창가 세 번째 자리. 10년 전 내 자리."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "거기 앉으니까, 그때 내가 뭘 보고 있었는지 생각났어."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "뭘 봤는데?"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "비밀. 너도 지금 보고 있잖아."
+    },
+    {
+     "who": "me",
+     "expr": "blush",
+     "text": "(…창밖을 보던 건, 그냥 버릇인데.)"
+    },
+    {
+     "who": "narr",
+     "text": "미래의 나의 그림자가 가로등 아래서 조금 옅어 보였다."
+    }
+   ]
+  },
+  "7": {
+   "bg": "hallway",
+   "morning": [
+    {
+     "who": "narr",
+     "text": "중간 점검 날. 학생회실 앞 복도가 북적였다."
+    },
+    {
+     "who": "doyun",
+     "expr": "surprised",
+     "text": "학생회 애들 눈 밑에 다크서클 봤냐? 판다 군단이야."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "축제 준비 절반 왔으니까 다들 바쁘겠지."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "흠흠. 점검표 안 낸 반은 오늘까지다. 우리 반이 꼴찌면 곤란하다."
+    },
+    {
+     "who": "doyun",
+     "expr": "happy",
+     "text": "선생님, 꼴찌도 순위입니다!"
+    },
+    {
+     "who": "kim",
+     "expr": "angry",
+     "text": "…도윤아, 점검표 네가 갖다 내라."
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "하굣길. 미래의 나는 회중시계를 꺼내 들여다보았다."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "시계, 괜찮아? 요즘 자주 보던데."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "응. 조금 느려졌을 뿐이야."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "할아버지 시계라 고집이 있거든. 너도 알잖아."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "할아버지는… 미래에도 그대로야?"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "이건 말해도 되겠다. 아주 건강하셔. 걱정 마."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "이 시계를 주시면서 그러셨지. 시간은 아껴 쓰는 게 아니라 잘 쓰는 거라고."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "잘 쓰는 거라…"
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "벌써 반이 지났어. 넌 이번 주, 잘 썼어?"
+    },
+    {
+     "who": "me",
+     "expr": "tired",
+     "text": "…모르겠어. 정신없이 지나간 것 같아."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "그것도 괜찮아. 남은 반이 있으니까."
+    }
+   ]
+  },
+  "8": {
+   "bg": "classroom",
+   "morning": [
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "흠흠. 책 덮어라. 쪽지시험이다."
+    },
+    {
+     "who": "doyun",
+     "expr": "surprised",
+     "text": "네에에?! 축제 준비 기간인데요?!"
+    },
+    {
+     "who": "kim",
+     "expr": "happy",
+     "text": "그러니까 깜짝이지. 공부 놓지 말라고 했다."
+    },
+    {
+     "who": "me",
+     "expr": "tired",
+     "text": "(어제 포스터 붙이느라 복습 하나도 못 했는데…)"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "(창밖에서 입 모양으로 '파이팅'이라고 한다. 도움은 안 된다.)"
+    },
+    {
+     "who": "narr",
+     "text": "교실에 연필 굴러가는 소리만 가득했다."
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "버스 정류장. 시험지를 쥔 손에 힘이 빠졌다."
+    },
+    {
+     "who": "me",
+     "expr": "tired",
+     "text": "망했어. 반은 찍었어."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "나도 그때 그 시험 망쳤다. 역사는 반복되는군."
+    },
+    {
+     "who": "me",
+     "expr": "angry",
+     "text": "미래에서 왔으면 답이라도 알려 주지!"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "10년 전 쪽지시험 답을 기억하는 사람이 어디 있냐."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "그래도 하나는 알려 줄게. 이 점수는 인생에 큰 영향 없어."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "근데 그 다음 날 다시 책을 폈는지는 꽤 영향 있더라."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "…다시 펴라는 거지?"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "눈치 빠르네. 역시 나야."
+    },
+    {
+     "who": "narr",
+     "text": "버스가 도착했다. 미래의 나는 손을 흔들며 뒤로 물러섰다."
+    },
+    {
+     "who": "narr",
+     "text": "버스 창 너머, 가로등 아래 그의 모습이 잠깐 흔들려 보였다."
+    }
+   ]
+  },
+  "9": {
+   "bg": "rain",
+   "morning": [
+    {
+     "who": "narr",
+     "text": "태풍처럼 비바람이 몰아쳤다. 창문이 덜컹덜컹 흔들렸다."
+    },
+    {
+     "who": "doyun",
+     "expr": "surprised",
+     "text": "우산이 뒤집혔어! 이번엔 가져왔는데!"
+    },
+    {
+     "who": "me",
+     "expr": "tired",
+     "text": "전통은 깨졌지만 결과는 같네."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "흠흠. 오늘은 운동장 작업 금지다. 실내에서만 해라."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "그리고 하교할 때 꼭 둘 이상 같이 다녀라."
+    },
+    {
+     "who": "future",
+     "expr": "tired",
+     "text": "(비에 홀딱 젖은 미래의 나가 현관에서 정장을 털고 있다.)"
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "비바람이 그친 밤. 젖은 운동장에 가로등 불빛이 번졌다."
+    },
+    {
+     "who": "future",
+     "expr": "tired",
+     "text": "오늘 3교시 때 우산 없이 뛰었다. 정장이 망했어."
+    },
+    {
+     "who": "me",
+     "expr": "happy",
+     "text": "미래의 나도 우산 안 챙기는 건 똑같구나."
+    },
+    {
+     "who": "future",
+     "expr": "angry",
+     "text": "도윤이한테 옮은 거야. 10년 동안."
+    },
+    {
+     "who": "narr",
+     "text": "웃던 미래의 나가 문득 손을 들어 가로등에 비춰 보았다."
+    },
+    {
+     "who": "narr",
+     "text": "손바닥 너머로 불빛이 희미하게 비쳐 보였다."
+    },
+    {
+     "who": "me",
+     "expr": "surprised",
+     "text": "야, 너… 손이 좀 투명해진 것 같은데."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "…응. 시계가 약해지고 있어. 원래 오래 버티는 물건이 아니거든."
+    },
+    {
+     "who": "me",
+     "expr": "sad",
+     "text": "그럼 사라지는 거야?"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "은하제까지는 버텨. 약속할게."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "그러니까 쓸데없는 걱정 말고 네 할 일에 집중해."
+    }
+   ]
+  },
+  "10": {
+   "bg": "field",
+   "morning": [
+    {
+     "who": "narr",
+     "text": "운동장에 무대 철골이 하나둘 세워지고 있었다."
+    },
+    {
+     "who": "doyun",
+     "expr": "happy",
+     "text": "오오, 진짜 축제 같다! 여기서 내가 노래 부르면…"
+    },
+    {
+     "who": "me",
+     "expr": "tired",
+     "text": "넌 먹거리 부스잖아."
+    },
+    {
+     "who": "doyun",
+     "expr": "normal",
+     "text": "꿈은 크게 꾸는 거야, {name}."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "흠흠. 무대 지원팀은 안전모 꼭 써라. 다치면 축제고 뭐고 없다."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "(무대 뒤에서 철골을 올려다보는 미래의 나. 눈이 반짝인다.)"
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "무대 조명 아래. 리허설 준비가 끝난 운동장은 텅 비어 있었다."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "무대 올라가 볼래? 아무도 없을 때."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "…좋아."
+    },
+    {
+     "who": "narr",
+     "text": "우리는 빈 무대 위에 나란히 섰다."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "10년 전엔 여기서 박수 치는 쪽이었어. 늘 객석에서."
+    },
+    {
+     "who": "future",
+     "expr": "sad",
+     "text": "무대에 올라갈 용기도, 누군가 앞에 설 용기도 없었지."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "지금은 올라와 있잖아."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "그러게. 너 덕분에."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "회사에서도 늘 발표를 남한테 미뤘어. 같은 버릇이야."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "…그럼 우리 둘 다, 이번엔 고쳐 보자."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "좋다. 거래 성립."
+    }
+   ]
+  },
+  "11": {
+   "bg": "hallway",
+   "morning": [
+    {
+     "who": "narr",
+     "text": "아침부터 복도가 소란스러웠다."
+    },
+    {
+     "who": "doyun",
+     "expr": "surprised",
+     "text": "큰일이다! 무대 조명이 고장 났대! 재료도 모자라고!"
+    },
+    {
+     "who": "me",
+     "expr": "surprised",
+     "text": "축제가 코앞인데?"
+    },
+    {
+     "who": "kim",
+     "expr": "tired",
+     "text": "흠흠… 다들 진정해라. 방법은 찾으면 있다."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "각 반 대표는 점심시간에 학생회실로 모여라."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "(복도 끝에서 미래의 나가 조용히 고개를 끄덕인다. 이것도 기억나는 모양이다.)"
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "하굣길. 오늘은 둘 다 말이 적었다."
+    },
+    {
+     "who": "me",
+     "expr": "tired",
+     "text": "조명 문제, 해결될까?"
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "해결됐어. 10년 전에도. 걱정 마."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "그럼 미래를 알고 있으니까 다 괜찮은 거네?"
+    },
+    {
+     "who": "future",
+     "expr": "sad",
+     "text": "그렇지 않아. 내가 아는 건 '내가 겪은 미래'뿐이야."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "너는 벌써 나랑 다른 걸 많이 골랐어. 그래서 나도 몰라."
+    },
+    {
+     "who": "me",
+     "expr": "surprised",
+     "text": "…그럼 네 미래는?"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "글쎄. 조금 달라질지도. 그게 좋은 쪽이면 좋겠다."
+    },
+    {
+     "who": "narr",
+     "text": "미래의 나의 목소리가 바람 소리에 묻혀 잘 들리지 않았다."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "(…목소리까지 희미해지는 건가.)"
+    }
+   ]
+  },
+  "12": {
+   "bg": "night",
+   "morning": [
+    {
+     "who": "narr",
+     "text": "오늘은 다 같이 늦게까지 남기로 한 날이었다."
+    },
+    {
+     "who": "doyun",
+     "expr": "happy",
+     "text": "야식은 내가 책임진다! 먹거리 부스 예행연습이다!"
+    },
+    {
+     "who": "me",
+     "expr": "happy",
+     "text": "이번만은 네 급식왕 기질이 고맙다."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "흠흠. 밤 9시까지만이다. 부모님께 연락은 꼭 드려라."
+    },
+    {
+     "who": "kim",
+     "expr": "happy",
+     "text": "…그리고 다들, 수고가 많다. 선생님이 김밥 쏜다."
+    },
+    {
+     "who": "doyun",
+     "expr": "surprised",
+     "text": "선생님! 평생 따르겠습니다!"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "(교문 밖에서 미래의 나가 김밥 한 줄을 들고 서 있다. 언제 받은 거야.)"
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "밤 9시. 불 꺼진 학교를 나서며 하늘을 올려다봤다."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "오늘 다들 멋있었다. 너도."
+    },
+    {
+     "who": "me",
+     "expr": "tired",
+     "text": "팔이 떨어질 것 같아. 그래도 무대 완성했어."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "10년 전 그날 밤, 나는 일찍 집에 갔어. 피곤하다고."
+    },
+    {
+     "who": "future",
+     "expr": "sad",
+     "text": "그래서 이런 밤이 있었는지도 몰랐지."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "…그럼 오늘은 너한테도 처음이네."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "그렇네. 이 나이에 첫 경험이라니, 신선하다."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "있잖아. 너랑 지내면서 나도 조금 바뀐 것 같아."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "돌아가면 친구들한테 먼저 연락해 보려고."
+    },
+    {
+     "who": "me",
+     "expr": "happy",
+     "text": "도윤이한테?"
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "걔가 제일 먼저지. 사회 봐 준 값 받아야 해."
+    },
+    {
+     "who": "narr",
+     "text": "그의 어깨 너머로 별이 비쳐 보였다. 정말로, 비쳐 보였다."
+    }
+   ]
+  },
+  "13": {
+   "bg": "night",
+   "morning": [
+    {
+     "who": "narr",
+     "text": "전야제. 학교 곳곳에 꼬마전구가 걸렸다."
+    },
+    {
+     "who": "doyun",
+     "expr": "happy",
+     "text": "드디어 내일이다! 불꽃놀이 전설의 날!"
+    },
+    {
+     "who": "doyun",
+     "expr": "normal",
+     "text": "너는 누구랑 볼 거냐? 응? 응?"
+    },
+    {
+     "who": "me",
+     "expr": "blush",
+     "text": "시, 시끄러워. 아직 몰라."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "흠흠. 들뜨는 건 좋다만 내일 지각하면 곤란하다."
+    },
+    {
+     "who": "kim",
+     "expr": "happy",
+     "text": "오늘은 일찍 자라. 좋은 축제 만들자."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "(꼬마전구 불빛 아래, 미래의 나가 조용히 시계를 쥐고 있다.)"
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "전야제가 끝난 운동장. 밤하늘에 별이 가득했다."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "…내일이야."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "응. 내일이네."
+    },
+    {
+     "who": "future",
+     "expr": "sad",
+     "text": "나는 그때 '내일 말해야지' 하고 잠들었어. 결국 못 했지만."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "무서웠어?"
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "응. 거절당하는 것보다, 지금 이대로가 깨지는 게 무서웠어."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "근데 10년 지나 보니까, 아무것도 안 한 게 제일 무섭더라."
+    },
+    {
+     "who": "me",
+     "expr": "sad",
+     "text": "…나도 무서워."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "당연하지. 너 나잖아."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "그래도 넌 혼자가 아니야. 내일은 내가 옆에 있을게."
+    },
+    {
+     "who": "narr",
+     "text": "회중시계의 초침이 툭, 툭, 힘겹게 움직였다."
+    },
+    {
+     "who": "narr",
+     "text": "미래의 나는 그 소리를 못 들은 척 별만 바라보았다."
+    }
+   ]
+  },
+  "14": {
+   "bg": "festival",
+   "morning": [
+    {
+     "who": "narr",
+     "text": "은하제 당일. 교문부터 풍선과 깃발이 넘실거렸다."
+    },
+    {
+     "who": "narr",
+     "text": "어디선가 음악이 흘렀고, 달콤한 냄새가 운동장을 가득 채웠다."
+    },
+    {
+     "who": "doyun",
+     "expr": "happy",
+     "text": "{name}! 드디어 왔다! 먹거리 부스 오픈 대박이다!"
+    },
+    {
+     "who": "doyun",
+     "expr": "happy",
+     "text": "첫 손님은 너다. 공짜는 아니고 친구 할인 10퍼센트!"
+    },
+    {
+     "who": "me",
+     "expr": "happy",
+     "text": "짠돌이 의리네."
+    },
+    {
+     "who": "kim",
+     "expr": "happy",
+     "text": "흠흠. 오늘은 잔소리 안 하마. 마음껏 즐겨라."
+    },
+    {
+     "who": "kim",
+     "expr": "normal",
+     "text": "…단, 쓰레기는 분리수거해라."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "(축제 인파 사이로 미래의 나가 솜사탕을 들고 웃는다. 제일 신났다.)"
+    }
+   ],
+   "night": [
+    {
+     "who": "narr",
+     "text": "해가 지고, 운동장에 하나둘 사람들이 모여들었다."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "곧 불꽃놀이야."
+    },
+    {
+     "who": "me",
+     "expr": "normal",
+     "text": "응."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "오늘 하루 어땠어?"
+    },
+    {
+     "who": "me",
+     "expr": "happy",
+     "text": "정신없고, 시끄럽고… 엄청 즐거웠어."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "그거면 됐다. 나도 10년 만에 제일 재밌는 하루였어."
+    },
+    {
+     "who": "narr",
+     "text": "미래의 나의 몸은 이제 가로등 불빛에도 희미하게 비쳐 보였다."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "시계가 거의 다 됐어. 불꽃놀이까지가 한계야."
+    },
+    {
+     "who": "me",
+     "expr": "sad",
+     "text": "…그런 말 하지 마. 아직 할 얘기 많은데."
+    },
+    {
+     "who": "future",
+     "expr": "happy",
+     "text": "할 얘기는 이제 내가 아니라 다른 사람한테 해야지."
+    },
+    {
+     "who": "future",
+     "expr": "normal",
+     "text": "자, 가자. 운동장으로."
+    }
+   ]
+  }
+ },
+ "swap": [
+  [
+   {
+    "who": "narr",
+    "text": "3교시 시작종이 울렸다. 주머니 속 회중시계가 지직, 하고 떨렸다."
+   },
+   {
+    "who": "narr",
+    "text": "눈앞이 하얗게 번지더니, 몸이 붕 뜨는 느낌이 들었다."
+   },
+   {
+    "who": "future",
+    "expr": "surprised",
+    "text": "(…어? 손이 커졌다. 정장 소매. 이건 미래의 나의 몸이다.)"
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "(이번 3교시는 내가 '미래의 나'다. 어른의 눈으로 둘러보자.)"
+   }
+  ],
+  [
+   {
+    "who": "narr",
+    "text": "딩동댕. 종소리와 함께 시계 바늘이 거꾸로 빙글 돌았다."
+   },
+   {
+    "who": "future",
+    "expr": "tired",
+    "text": "(으윽, 키가 갑자기 커지니 어지럽다. 천장이 가까워.)"
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "(교실 안에서 '나'가 하품을 하고 있다. 저게 나라니.)"
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "(좋아. 수상한 어른 모드, 시작이다.)"
+   }
+  ],
+  [
+   {
+    "who": "narr",
+    "text": "지직, 지지직. 회중시계에서 라디오 잡음 같은 소리가 났다."
+   },
+   {
+    "who": "narr",
+    "text": "세상이 한 박자 늦게 흔들리더니, 시야의 높이가 바뀌었다."
+   },
+   {
+    "who": "future",
+    "expr": "surprised",
+    "text": "(넥타이가 목을 조인다… 어른들은 매일 이걸 어떻게 매는 거지.)"
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "(3교시 동안은 연애 이벤트는 못 한다. 대신 힌트를 모으자.)"
+   }
+  ],
+  [
+   {
+    "who": "narr",
+    "text": "3교시 종이 울리는 순간, 귓가에 초침 소리가 크게 울렸다."
+   },
+   {
+    "who": "future",
+    "expr": "surprised",
+    "text": "(앗, 또 바뀌었다! 이번엔 복도 한가운데다.)"
+   },
+   {
+    "who": "narr",
+    "text": "지나가던 학생이 고개를 갸웃했다. '누구 형이지?' 하는 얼굴이었다."
+   },
+   {
+    "who": "future",
+    "expr": "tired",
+    "text": "(…수상해 보이지 않게, 자연스럽게. 자연스럽게.)"
+   }
+  ],
+  [
+   {
+    "who": "narr",
+    "text": "째깍— 하고 시간이 멈춘 듯한 정적. 그리고 다시 움직이는 소리."
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "(몸이 무겁다. 어깨가 결린다. 이게 스물일곱 살의 어깨인가.)"
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "(그래도 시야는 넓다. 어른의 눈으로 보면 다르게 보이는 게 있겠지.)"
+   }
+  ],
+  [
+   {
+    "who": "narr",
+    "text": "종소리가 울리자 회중시계 뚜껑이 저절로 탁 열렸다."
+   },
+   {
+    "who": "narr",
+    "text": "빛이 번쩍이고, 발밑의 그림자가 길게 늘어났다."
+   },
+   {
+    "who": "future",
+    "expr": "surprised",
+    "text": "(…구두다. 내 발에 구두가 신겨 있다.)"
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "(지금 나는 10년 뒤의 나. 다른 사람 눈엔 낯선 어른일 뿐이야.)"
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "(자, 미래에서 온 탐정 놀이를 해 볼까.)"
+   }
+  ],
+  [
+   {
+    "who": "narr",
+    "text": "3교시 종. 시계가 지직거리며 뜨거워졌다."
+   },
+   {
+    "who": "future",
+    "expr": "tired",
+    "text": "(으아, 커피 생각이 난다. 이 몸, 카페인 중독이구나.)"
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "(정신 차리자. 이 시간에만 볼 수 있는 것들이 있어.)"
+   }
+  ],
+  [
+   {
+    "who": "narr",
+    "text": "시계 바늘이 부르르 떨더니, 세상이 물속처럼 일렁였다."
+   },
+   {
+    "who": "narr",
+    "text": "정신을 차리자 손목에 낯선 손목시계가 채워져 있었다."
+   },
+   {
+    "who": "future",
+    "expr": "surprised",
+    "text": "(회사 출입증까지 목에 걸려 있다… 사진 속 얼굴, 피곤해 보인다.)"
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "(…10년 뒤의 내가 이런 얼굴이구나. 웃게 해 주고 싶다.)"
+   }
+  ]
+ ],
+ "unswap": [
+  [
+   {
+    "who": "narr",
+    "text": "4교시 종이 울렸다. 회중시계가 딸깍, 하고 조용해졌다."
+   },
+   {
+    "who": "me",
+    "expr": "surprised",
+    "text": "(…돌아왔다! 교복이다. 몸이 가볍다!)"
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "(창밖에서 미래의 나가 손을 흔든다. '수고했어'라는 얼굴로.)"
+   }
+  ],
+  [
+   {
+    "who": "narr",
+    "text": "빛이 사그라들자 익숙한 책상 감촉이 손끝에 닿았다."
+   },
+   {
+    "who": "me",
+    "expr": "tired",
+    "text": "(휴, 어깨 결림이 사라졌다. 어른 몸은 너무 무거워.)"
+   },
+   {
+    "who": "doyun",
+    "expr": "normal",
+    "text": "{name}, 너 방금 졸았냐? 눈이 풀렸는데."
+   }
+  ],
+  [
+   {
+    "who": "narr",
+    "text": "째깍, 째깍. 초침이 다시 제 박자를 찾았다."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "(원래대로다. 3교시에 본 것들, 잊지 말아야지.)"
+   }
+  ],
+  [
+   {
+    "who": "narr",
+    "text": "4교시 시작. 어지러움이 가시고 시야가 낮아졌다."
+   },
+   {
+    "who": "me",
+    "expr": "surprised",
+    "text": "(천장이 멀어졌다. 확실히 돌아왔어.)"
+   },
+   {
+    "who": "future",
+    "expr": "tired",
+    "text": "(멀리서 미래의 나가 넥타이를 풀며 한숨을 쉬고 있다.)"
+   },
+   {
+    "who": "me",
+    "expr": "happy",
+    "text": "(…수고했다, 나.)"
+   }
+  ],
+  [
+   {
+    "who": "narr",
+    "text": "종소리와 함께 회중시계가 미지근하게 식었다."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "(돌아왔다. 이제 다시 내 시간이다.)"
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "(아까 그 힌트, 잘 써먹어라. 나.)"
+   }
+  ]
+ ],
+ "festival": [
+  {
+   "who": "narr",
+   "text": "해가 완전히 지고, 운동장 조명이 하나씩 꺼졌다."
+  },
+  {
+   "who": "narr",
+   "text": "수백 명의 학생들이 하늘을 올려다보며 웅성거렸다."
+  },
+  {
+   "who": "doyun",
+   "expr": "happy",
+   "text": "{name}! 여기 있었냐! 곧 시작한대!"
+  },
+  {
+   "who": "doyun",
+   "expr": "normal",
+   "text": "…근데 너, 여기서 나랑 볼 거야?"
+  },
+  {
+   "who": "me",
+   "expr": "surprised",
+   "text": "어?"
+  },
+  {
+   "who": "doyun",
+   "expr": "happy",
+   "text": "가 봐야 할 데 있으면 가. 의리는 다음 축제 때 지키면 돼."
+  },
+  {
+   "who": "me",
+   "expr": "blush",
+   "text": "도윤아…"
+  },
+  {
+   "who": "doyun",
+   "expr": "happy",
+   "text": "대신 나중에 다 얘기해 줘야 한다! 정보통의 권리다!"
+  },
+  {
+   "who": "narr",
+   "text": "도윤은 씩 웃으며 친구들 쪽으로 사라졌다."
+  },
+  {
+   "who": "kim",
+   "expr": "normal",
+   "text": "흠흠. 다들 질서 지켜라. 뛰지 말고."
+  },
+  {
+   "who": "kim",
+   "expr": "happy",
+   "text": "…그리고 하고 싶은 말 있으면, 오늘 하는 것도 나쁘지 않다."
+  },
+  {
+   "who": "narr",
+   "text": "김 선생님은 혼잣말처럼 중얼거리고는 뒤돌아섰다."
+  },
+  {
+   "who": "han",
+   "expr": "happy",
+   "text": "다친 사람 있으면 보건 천막으로 와요. 마음 다친 사람도요."
+  },
+  {
+   "who": "narr",
+   "text": "운동장 구석, 사람들 눈에 잘 띄지 않는 곳에 미래의 나가 서 있었다."
+  },
+  {
+   "who": "narr",
+   "text": "그의 몸은 이제 반쯤 투명해, 등 뒤의 조명이 비쳐 보였다."
+  },
+  {
+   "who": "future",
+   "expr": "normal",
+   "text": "왔구나."
+  },
+  {
+   "who": "me",
+   "expr": "sad",
+   "text": "너… 거의 안 보여."
+  },
+  {
+   "who": "future",
+   "expr": "happy",
+   "text": "괜찮아. 불꽃 하나 터질 때까지는 버틸 거야."
+  },
+  {
+   "who": "future",
+   "expr": "normal",
+   "text": "있잖아. 10년 전 오늘, 나는 여기 서 있기만 했어."
+  },
+  {
+   "who": "future",
+   "expr": "sad",
+   "text": "저쪽을 보면서. 발이 안 떨어져서."
+  },
+  {
+   "who": "future",
+   "expr": "normal",
+   "text": "불꽃이 다 끝날 때까지 그냥 서 있었지."
+  },
+  {
+   "who": "me",
+   "expr": "normal",
+   "text": "…"
+  },
+  {
+   "who": "future",
+   "expr": "normal",
+   "text": "넌 2주 동안 많은 걸 했어. 내가 못 한 것들을."
+  },
+  {
+   "who": "future",
+   "expr": "happy",
+   "text": "이제 마지막 하나만 남았네."
+  },
+  {
+   "who": "narr",
+   "text": "첫 번째 불꽃이 피융, 하고 하늘로 솟아올랐다."
+  },
+  {
+   "who": "future",
+   "expr": "happy",
+   "text": "지금이야. 가."
+  },
+  {
+   "who": "narr",
+   "text": "미래의 나가 내 등을 가볍게, 그러나 단단하게 밀었다."
+  },
+  {
+   "who": "me",
+   "expr": "normal",
+   "text": "(…응. 갈게.)"
+  },
+  {
+   "who": "narr",
+   "text": "밤하늘에 첫 불꽃이 활짝 피었다."
+  }
+ ],
+ "normal_endings": {
+  "체력": [
+   {
+    "who": "narr",
+    "text": "불꽃이 하늘을 수놓았다. 나는 결국 아무에게도 가지 못했다."
+   },
+   {
+    "who": "narr",
+    "text": "운동장 스탠드 끝, 미래의 나와 나란히 앉아 하늘을 봤다."
+   },
+   {
+    "who": "me",
+    "expr": "sad",
+    "text": "…미안. 또 못 했어."
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "사과할 거 없어. 너, 이번 2주 동안 진짜 달라졌잖아."
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "매일 아침 뛰고, 무대 철골도 나르고. 얼굴색부터 달라."
+   },
+   {
+    "who": "me",
+    "expr": "tired",
+    "text": "그건 그냥 일이 많아서…"
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "그걸 끝까지 해낸 게 대단한 거야. 나는 그때 맨날 지쳐 있었거든."
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "회사 다니면서 제일 아쉬웠던 게 몸이었어. 늘 피곤했지."
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "네가 지금 만든 습관은, 10년 뒤의 너를 지켜 줄 거야."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "…그럼 조금은 의미가 있었네."
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "조금이 아니라 많이."
+   },
+   {
+    "who": "narr",
+    "text": "회중시계가 째깍, 하고 마지막 소리를 냈다."
+   },
+   {
+    "who": "narr",
+    "text": "미래의 나의 모습이 불꽃 사이로 흩어지기 시작했다."
+   },
+   {
+    "who": "me",
+    "expr": "surprised",
+    "text": "벌써…?"
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "응. 시간 다 됐다."
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "다음엔 꼭 마음을 전해. 그 튼튼한 다리로 달려가서."
+   },
+   {
+    "who": "me",
+    "expr": "sad",
+    "text": "…응. 약속할게."
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "마지막 개그. 달리기를 잘하는 과일은?"
+   },
+   {
+    "who": "me",
+    "expr": "happy",
+    "text": "…뭔데."
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "참외. 참 외롭게 달리니까. …아니, 이제 안 외롭겠지."
+   },
+   {
+    "who": "narr",
+    "text": "웃음소리를 남기고, 미래의 나는 빛이 되어 사라졌다."
+   },
+   {
+    "who": "narr",
+    "text": "손바닥 위에는 멈춰 버린 회중시계만 남아 있었다."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "(다음엔, 꼭. 이번엔 진짜로.)"
+   },
+   {
+    "who": "narr",
+    "text": "마지막 불꽃이 하늘에서 천천히 사라졌다."
+   }
+  ],
+  "성적": [
+   {
+    "who": "narr",
+    "text": "불꽃이 터지는 동안, 나는 끝내 발을 떼지 못했다."
+   },
+   {
+    "who": "narr",
+    "text": "도서관 불빛이 보이는 스탠드에서 미래의 나가 옆에 앉았다."
+   },
+   {
+    "who": "me",
+    "expr": "sad",
+    "text": "…결국 나도 똑같네. 말 못 했어."
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "똑같지 않아. 너, 이번 2주 동안 공부 놓지 않았잖아."
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "쪽지시험 망친 다음 날 다시 책 편 거, 나 봤다."
+   },
+   {
+    "who": "me",
+    "expr": "blush",
+    "text": "그런 걸 왜 보고 있어."
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "나는 그때 꿈이 뭔지도 모르고 그냥 흘러갔어."
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "하고 싶은 게 생겼을 땐, 이미 늦었다고 생각했지."
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "근데 너는 벌써 뭘 하고 싶은지 조금씩 보이는 얼굴이야."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "…아직 확실하진 않아."
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "확실하지 않아도 돼. 그 방향으로 걷고 있으면 돼."
+   },
+   {
+    "who": "narr",
+    "text": "회중시계의 초침이 천천히, 아주 천천히 멈춰 갔다."
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "아, 슬슬인가 보다."
+   },
+   {
+    "who": "me",
+    "expr": "sad",
+    "text": "좀 더 있다 가면 안 돼?"
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "미래에서 회의가 있거든. 농담이야."
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "다음엔 꼭 마음을 전해. 공부만큼 그것도 중요하다."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "…알았어. 노트 첫 장에 적어 둘게."
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "그래. 그리고 가끔은 나를 떠올려 줘. 썰렁한 개그랑 같이."
+   },
+   {
+    "who": "narr",
+    "text": "불꽃의 빛에 섞여, 미래의 나는 조용히 사라졌다."
+   },
+   {
+    "who": "narr",
+    "text": "멈춘 회중시계는 아직 따뜻했다."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "(10년 뒤의 나에게 부끄럽지 않게. 그리고, 다음엔 꼭.)"
+   },
+   {
+    "who": "narr",
+    "text": "밤하늘에 남은 연기가 천천히 별빛 사이로 흩어졌다."
+   }
+  ],
+  "우정": [
+   {
+    "who": "narr",
+    "text": "불꽃이 터지고, 운동장에 환호성이 가득 찼다."
+   },
+   {
+    "who": "narr",
+    "text": "나는 결국 아무에게도 가지 못했다. 대신, 친구들 사이에 있었다."
+   },
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "{name}! 이쪽이야! 자리 맡아 놨다!"
+   },
+   {
+    "who": "narr",
+    "text": "도윤과 반 친구들 사이에 끼어 앉아 불꽃을 올려다봤다."
+   },
+   {
+    "who": "narr",
+    "text": "그 뒤편, 조명이 닿지 않는 곳에 미래의 나가 서 있었다."
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "좋은 자리네."
+   },
+   {
+    "who": "me",
+    "expr": "sad",
+    "text": "…미안. 이번에도 못 했어."
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "있잖아. 나는 그때 혼자였어. 불꽃놀이 끝나고 혼자 집에 갔지."
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "근데 넌 지금 이렇게 시끄러운 녀석들 사이에 있잖아."
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "반 회의 때 먼저 손 내밀고, 늦은 밤까지 같이 남고."
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "그거, 10년 뒤에도 남는다. 내가 보장해."
+   },
+   {
+    "who": "me",
+    "expr": "happy",
+    "text": "…도윤이 결혼식 사회 보는 것까지?"
+   },
+   {
+    "who": "future",
+    "expr": "happy",
+    "text": "그건 직접 확인해."
+   },
+   {
+    "who": "narr",
+    "text": "회중시계에서 째깍, 하고 마지막 소리가 났다."
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "자, 이제 진짜 가야겠다."
+   },
+   {
+    "who": "me",
+    "expr": "sad",
+    "text": "…응."
+   },
+   {
+    "who": "future",
+    "expr": "normal",
+    "text": "다음엔 꼭 마음을 전해. 이 녀석들이 등 떠밀어 줄 거야."
+   },
+   {
+    "who": "doyun",
+    "expr": "surprised",
+    "text": "{name}, 누구랑 얘기하냐? 뒤에 아무도 없는데?"
+   },
+   {
+    "who": "me",
+    "expr": "happy",
+    "text": "…아니야. 그냥, 소중한 사람."
+   },
+   {
+    "who": "narr",
+    "text": "돌아봤을 때, 그 자리엔 아무도 없었다."
+   },
+   {
+    "who": "narr",
+    "text": "손 안의 회중시계는 조용히 멈춰 있었다."
+   },
+   {
+    "who": "me",
+    "expr": "happy",
+    "text": "(고마워, 나. 다음엔 꼭.)"
+   },
+   {
+    "who": "narr",
+    "text": "친구들의 웃음소리 위로, 마지막 불꽃이 크게 피어올랐다."
+   }
+  ]
+ },
+ "doyun_chat": [
+  [
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "{name}, 오늘의 정보 하나 줄까?"
+   },
+   {
+    "who": "doyun",
+    "expr": "normal",
+    "text": "도서부 서린이, 신간 들어오는 날엔 표정이 0.5밀리 풀린대."
+   },
+   {
+    "who": "me",
+    "expr": "tired",
+    "text": "그걸 어떻게 재는 건데."
+   }
+  ],
+  [
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "연애의 기본은 뭔지 아냐? 타이밍이다."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "오, 웬일로 그럴듯한데."
+   },
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "급식도 타이밍이야. 늦으면 고기 없어."
+   },
+   {
+    "who": "me",
+    "expr": "tired",
+    "text": "결국 급식 얘기구나."
+   }
+  ],
+  [
+   {
+    "who": "doyun",
+    "expr": "surprised",
+    "text": "야, 부회장 유리 봤냐? 서류 세 뭉치 들고 뛰어다니던데."
+   },
+   {
+    "who": "doyun",
+    "expr": "normal",
+    "text": "저러다 쓰러지겠다. 누가 좀 도와줘야 하는데."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "…(그러게.)"
+   }
+  ],
+  [
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "봄이 오늘도 운동장 열 바퀴 돌더라."
+   },
+   {
+    "who": "doyun",
+    "expr": "normal",
+    "text": "근데 가끔 발목 만지는 거, 나만 봤나?"
+   },
+   {
+    "who": "me",
+    "expr": "surprised",
+    "text": "(정보통 눈은 무섭네.)"
+   }
+  ],
+  [
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "하율 선배 요리부 시식회, 나 3년 개근 예정이다."
+   },
+   {
+    "who": "me",
+    "expr": "tired",
+    "text": "넌 2학년이잖아."
+   },
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "내년까지 포함해서 예약해 둔 거야."
+   }
+  ],
+  [
+   {
+    "who": "doyun",
+    "expr": "normal",
+    "text": "전학생 시온 말이야, 보건실에 자주 있대."
+   },
+   {
+    "who": "doyun",
+    "expr": "normal",
+    "text": "근데 이상하게 별 얘기만 나오면 눈이 반짝인대."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "별 좋아하나 보지."
+   }
+  ],
+  [
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "{name}, 불꽃놀이 전설 알지? 나는 올해 먹거리 부스랑 이어질 거다."
+   },
+   {
+    "who": "me",
+    "expr": "tired",
+    "text": "사람이 아니라 부스랑?"
+   },
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "떡볶이는 배신하지 않거든."
+   }
+  ],
+  [
+   {
+    "who": "doyun",
+    "expr": "normal",
+    "text": "너 요즘 혼잣말 많이 한다? 허공 보면서."
+   },
+   {
+    "who": "me",
+    "expr": "surprised",
+    "text": "어, 어? 그런가?"
+   },
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "사춘기냐. 괜찮다, 형이 이해한다."
+   }
+  ],
+  [
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "퀴즈! 고백 성공률을 높이는 비결은?"
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "…뭔데."
+   },
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "일단 고백을 한다. 안 하면 0퍼센트니까."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "(…가끔 맞는 말을 해서 당황스럽다.)"
+   }
+  ],
+  [
+   {
+    "who": "doyun",
+    "expr": "tired",
+    "text": "김 선생님한테 또 걸렸다. 수업 중에 빵 먹다가."
+   },
+   {
+    "who": "me",
+    "expr": "tired",
+    "text": "왜 수업 중에 빵을 먹어."
+   },
+   {
+    "who": "doyun",
+    "expr": "normal",
+    "text": "배고픔은 시간표를 모르거든."
+   }
+  ],
+  [
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "나 어제 거울 보고 고백 연습했다."
+   },
+   {
+    "who": "me",
+    "expr": "surprised",
+    "text": "누구한테?"
+   },
+   {
+    "who": "doyun",
+    "expr": "blush",
+    "text": "…거울한테. 거울이 대답을 안 하더라."
+   },
+   {
+    "who": "me",
+    "expr": "tired",
+    "text": "당연하지."
+   }
+  ],
+  [
+   {
+    "who": "doyun",
+    "expr": "normal",
+    "text": "있잖아, {name}. 너 요즘 좀 멋있어졌다."
+   },
+   {
+    "who": "me",
+    "expr": "blush",
+    "text": "갑자기 뭐야."
+   },
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "칭찬이다. 매점 빵 하나 사 주면 더 해 줄게."
+   }
+  ],
+  [
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "은하제 날 먹거리 부스에 와라. 우정 할인 해 줄게."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "얼마나?"
+   },
+   {
+    "who": "doyun",
+    "expr": "happy",
+    "text": "10퍼센트. 대신 홍보 전단 100장 돌리기."
+   },
+   {
+    "who": "me",
+    "expr": "tired",
+    "text": "그건 할인이 아니라 노동이야."
+   }
+  ]
+ ],
+ "kim_chat": [
+  [
+   {
+    "who": "kim",
+    "expr": "normal",
+    "text": "흠흠. {name}, 축제 준비도 좋지만 복습은 하고 있느냐."
+   },
+   {
+    "who": "me",
+    "expr": "tired",
+    "text": "조금씩… 하고 있습니다."
+   },
+   {
+    "who": "kim",
+    "expr": "happy",
+    "text": "조금씩이면 충분하다. 멈추지만 않으면 돼."
+   }
+  ],
+  [
+   {
+    "who": "kim",
+    "expr": "normal",
+    "text": "진로 조사서 아직 안 냈더구나."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "아직 뭘 하고 싶은지 잘 몰라서요."
+   },
+   {
+    "who": "kim",
+    "expr": "happy",
+    "text": "모르는 게 당연하다. 선생님도 너 나이 땐 몰랐다."
+   },
+   {
+    "who": "kim",
+    "expr": "normal",
+    "text": "그러니 많이 해 보고, 많이 읽어라. 흠흠."
+   }
+  ],
+  [
+   {
+    "who": "kim",
+    "expr": "normal",
+    "text": "요즘 수상한 어른이 학교 근처를 돈다는 말이 있더구나."
+   },
+   {
+    "who": "me",
+    "expr": "surprised",
+    "text": "(…미래의 나다.)"
+   },
+   {
+    "who": "kim",
+    "expr": "normal",
+    "text": "혹시 보면 바로 말하거라. 근데 이상하게 너를 닮았다던데."
+   },
+   {
+    "who": "me",
+    "expr": "tired",
+    "text": "하, 하하… 세상엔 닮은 사람이 많죠."
+   }
+  ],
+  [
+   {
+    "who": "kim",
+    "expr": "normal",
+    "text": "글은 마음을 정리하는 도구다. 일기라도 써 보거라."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "일기요? 쑥스러운데요."
+   },
+   {
+    "who": "kim",
+    "expr": "happy",
+    "text": "쑥스러운 걸 쓸 수 있으면, 말로도 할 수 있게 된다."
+   }
+  ],
+  [
+   {
+    "who": "kim",
+    "expr": "tired",
+    "text": "흠흠. 도윤이 좀 말려 주거라. 또 수업 중에 뭘 먹더구나."
+   },
+   {
+    "who": "me",
+    "expr": "happy",
+    "text": "그건 제 힘으로는 무리입니다."
+   },
+   {
+    "who": "kim",
+    "expr": "tired",
+    "text": "…그렇겠지. 선생님도 3년째 실패 중이다."
+   }
+  ],
+  [
+   {
+    "who": "kim",
+    "expr": "normal",
+    "text": "{name}, 요즘 표정이 좋아졌구나."
+   },
+   {
+    "who": "me",
+    "expr": "blush",
+    "text": "그런가요?"
+   },
+   {
+    "who": "kim",
+    "expr": "happy",
+    "text": "무슨 일인지는 묻지 않으마. 다만 그 얼굴, 오래 간직해라."
+   }
+  ]
+ ],
+ "han_chat": [
+  [
+   {
+    "who": "han",
+    "expr": "happy",
+    "text": "어서 와요, {name}. 어디 아파서 왔어요?"
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "아뇨, 그냥… 잠깐 쉬고 싶어서요."
+   },
+   {
+    "who": "han",
+    "expr": "happy",
+    "text": "그것도 훌륭한 이유예요. 침대 하나 비어 있어요."
+   }
+  ],
+  [
+   {
+    "who": "han",
+    "expr": "normal",
+    "text": "요즘 잠은 잘 자요? 눈 밑이 좀 어둡네요."
+   },
+   {
+    "who": "me",
+    "expr": "tired",
+    "text": "축제 준비 때문에 좀 늦게 자요."
+   },
+   {
+    "who": "han",
+    "expr": "normal",
+    "text": "잠은 미래의 나를 위한 저축이에요. 미루지 말아요."
+   },
+   {
+    "who": "me",
+    "expr": "surprised",
+    "text": "(…미래의 나라니. 뜨끔하다.)"
+   }
+  ],
+  [
+   {
+    "who": "han",
+    "expr": "normal",
+    "text": "물 많이 마셔요. 9월이라도 아직 더워요."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "네. 근데 선생님은 항상 물병 들고 다니시네요."
+   },
+   {
+    "who": "han",
+    "expr": "happy",
+    "text": "보건 선생님의 상징이에요. 청진기보다 자주 써요."
+   }
+  ],
+  [
+   {
+    "who": "han",
+    "expr": "normal",
+    "text": "고민 있는 얼굴이네요. 말 안 해도 괜찮아요."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "…말하려고 하면 목에서 걸려요."
+   },
+   {
+    "who": "han",
+    "expr": "happy",
+    "text": "그럼 천천히 해요. 마음이 준비되면 말은 따라와요."
+   }
+  ],
+  [
+   {
+    "who": "han",
+    "expr": "happy",
+    "text": "스트레칭 하나 알려 줄게요. 어깨를 크게 돌려 봐요."
+   },
+   {
+    "who": "me",
+    "expr": "tired",
+    "text": "으윽… 뚝 소리 났어요."
+   },
+   {
+    "who": "han",
+    "expr": "happy",
+    "text": "그만큼 굳어 있었다는 뜻이에요. 매일 해요."
+   }
+  ],
+  [
+   {
+    "who": "han",
+    "expr": "normal",
+    "text": "아픈 친구가 있으면 혼자 끙끙대게 두지 마요."
+   },
+   {
+    "who": "han",
+    "expr": "happy",
+    "text": "여기 데려오면 돼요. 같이 오는 사람도 큰 힘이 되거든요."
+   },
+   {
+    "who": "me",
+    "expr": "normal",
+    "text": "…네. 기억할게요."
+   }
+  ]
+ ]
+}

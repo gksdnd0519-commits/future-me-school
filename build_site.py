@@ -11,18 +11,20 @@
 
 import re
 import shutil
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent
 WEB = ROOT / "web"
-OUT = ROOT / "site"
+# 만들 폴더 : 보통은 site/, 다른 곳에 만들고 싶으면  python build_site.py <폴더>
+OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "site"
 
 
 def main():
     # 예전에 만든 site 폴더가 있으면 지우고 새로 만든다
     if OUT.exists():
-        shutil.rmtree(OUT)
-    shutil.copytree(WEB / "static", OUT / "static")
+        shutil.rmtree(OUT, ignore_errors=True)   # OneDrive 가 잡고 있으면 남은 파일 위에 덮어씀
+    shutil.copytree(WEB / "static", OUT / "static", dirs_exist_ok=True)
 
     html = (WEB / "templates" / "index.html").read_text(encoding="utf-8")
 

@@ -38,6 +38,12 @@ const OUTFITS = {
              shortSleeve: true, lower: "shorts" },
   teacher: { top: "#8a7a52", pants: "#5a4a3a", shoe: "#3a2a22", shirt: "#ffffff", tie: "#7a3a3a", lower: "pants" },
   nurse:   { top: "#ffffff", pants: "#9ec9ff", shoe: "#ffffff", inner: "#ff9cb8", coat: true, lower: "pants" },
+  // 여학생 블레이저 + 체크무늬 치마
+  blazer_girl: { top: "#2d3a6b", skirt: "#8a2b3c", plaid: "#e9c46a", sock: "#1f1f2b", shoe: "#5a3a28",
+                 shirt: "#ffffff", tie: "#d64157", lower: "skirt" },
+  // 3학년 선배 : 카디건 + 리본
+  cardigan: { top: "#f0d6a8", skirt: "#3d4a7a", plaid: "#9fb3e8", sock: "#f5f5f5", shoe: "#6b3f2a",
+              shirt: "#ffffff", scarf: "#e8455d", lower: "skirt" },
 };
 
 // ─────────────────────────────────────────────────────────────
@@ -46,15 +52,19 @@ const OUTFITS = {
 //   legLen / torso : 다리·몸통 길이 (어른은 더 길다)
 // ─────────────────────────────────────────────────────────────
 const LOOKS = {
-  student:  { hair: "messy",  hairColor: "#2f3352", eye: "#e0952f", outfit: "blazer",  legLen: 12, torso: 13, ahoge: true, bag: "backpack" },
-  future:   { hair: "neat",   hairColor: "#2f3352", eye: "#e0952f", outfit: "suit",    legLen: 19, torso: 16, ahoge: true, glasses: true, bag: "briefcase" },
-  서아:     { hair: "long",   hairColor: "#1f1c30", eye: "#c23b3b", outfit: "sailor",  legLen: 12, torso: 12, ribbon: "#e8455d" },
-  하린:     { hair: "twin",   hairColor: "#ff9cc4", eye: "#e0458f", outfit: "sailor",  legLen: 11, torso: 12, ribbon: "#ffd84a" },
-  도윤:     { hair: "spiky",  hairColor: "#ff8a3d", eye: "#3fae5a", outfit: "gakuran", legLen: 13, torso: 14 },
-  유나:     { hair: "bob",    hairColor: "#8c6bd6", eye: "#7b4fd1", outfit: "sailor",  legLen: 11, torso: 12, glasses: true, hairpin: "#7fd1ff" },
-  태오:     { hair: "sporty", hairColor: "#3a7bd5", eye: "#2f80ed", outfit: "pe",      legLen: 13, torso: 13, headband: "#ff4757" },
-  김선생님: { hair: "neat",   hairColor: "#6b5a4e", eye: "#6b4a36", outfit: "teacher", legLen: 19, torso: 16 },
-  한선생님: { hair: "pony",   hairColor: "#a0603e", eye: "#9a5a3a", outfit: "nurse",   legLen: 18, torso: 15, ribbon: "#ff9cb8" },
+  // 주인공 두 명
+  student: { hair: "messy",  hairColor: "#2f3352", eye: "#e0952f", outfit: "blazer",  legLen: 12, torso: 13, ahoge: true, bag: "backpack" },
+  future:  { hair: "neat",   hairColor: "#2f3352", eye: "#e0952f", outfit: "suit",    legLen: 19, torso: 16, ahoge: true, glasses: true, bag: "briefcase" },
+  // 히로인 5명
+  seorin:  { hair: "long",   hairColor: "#1d1b33", eye: "#8f6bff", outfit: "sailor",  legLen: 12, torso: 12, hairpin: "#c9b6ff", scarf: "#5b4bb7" },
+  yuri:    { hair: "twin",   hairColor: "#e0485e", eye: "#f2a93b", outfit: "blazer_girl", legLen: 11, torso: 12, ribbon: "#24203d" },
+  bom:     { hair: "side",   hairColor: "#ff9a3c", eye: "#2fb37a", outfit: "pe",      legLen: 12, torso: 12, ribbon: "#ffe066" },
+  hayul:   { hair: "wavy",   hairColor: "#a8673f", eye: "#c26b4a", outfit: "cardigan", legLen: 13, torso: 13, ribbon: "#ffb3c7" },
+  sion:    { hair: "bob",    hairColor: "#e3e9f7", eye: "#4aa3ff", outfit: "sailor",  legLen: 11, torso: 12, hairpin: "#ffe066", scarf: "#4aa3ff", skin: "#fff0e8" },
+  // 조연
+  doyun:   { hair: "spiky",  hairColor: "#5a4232", eye: "#3fae5a", outfit: "gakuran", legLen: 13, torso: 14 },
+  kim:     { hair: "neat",   hairColor: "#6b5a4e", eye: "#6b4a36", outfit: "teacher", legLen: 19, torso: 16 },
+  han:     { hair: "pony",   hairColor: "#a0603e", eye: "#9a5a3a", outfit: "nurse",   legLen: 18, torso: 15, ribbon: "#ff9cb8" },
 };
 
 // 머리 모양별 앞머리 끝(tips) 위치. valley = 앞머리 사이 들어간 곳 높이, side = 옆머리 길이
@@ -67,6 +77,8 @@ const STYLES = {
   bob:    { tips: [[-15, 9], [-10, 2.5], [-3.5, 3], [3.5, 3], [10, 2.5], [15, 9]], valley: -1.5, side: 12 },
   sporty: { tips: [[-14.5, 1], [-8, -2.5], [-1, -0.5], [6, -3], [14.5, 1]], valley: -9, spikes: "small" },
   pony:   { tips: [[-14.5, 5], [-7, -1], [2, -3], [9, 0], [15, 4]], valley: -8, side: 10 },
+  side:   { tips: [[-15, 6], [-10, 1], [-4, 3], [2, 0], [8, 3], [14, 5]], valley: -6, side: 8 },
+  wavy:   { tips: [[-15, 9], [-9, 2], [-3, 4], [3, 1], [9, 3], [15, 9]], valley: -5, side: 20 },
 };
 
 const BIG_SPIKES = [[-15, -6], [-21, -12], [-13, -15], [-14, -24], [-6, -19], [-2, -28], [3, -20],
@@ -135,6 +147,10 @@ function drawFigure(c, L, o = {}) {
     c.save();                                         // 주름 선
     c.lineWidth = ol * 0.6; c.strokeStyle = shade(F.skirt, 0.35);
     for (const k of [-6, -2, 2, 6]) { c.beginPath(); c.moveTo(k * 0.7, hipY - 3); c.lineTo(k + swing * 0.4, hipY + 4.2); c.stroke(); }
+    if (F.plaid) {                                    // 체크무늬 가로줄
+      c.strokeStyle = F.plaid; c.globalAlpha = 0.7;
+      for (const y of [hipY - 1, hipY + 2]) { c.beginPath(); c.moveTo(-9, y); c.lineTo(9, y); c.stroke(); }
+    }
     c.restore();
   } else if (F.lower === "shorts") {
     c.beginPath(); c.roundRect(-7.2, hipY - 3.5, 14.4, 6.5, 2); fillStroke(c, F.shorts);
@@ -187,8 +203,16 @@ function drawArm(c, L, F, side, shY, tor, swing, skin, ol) {
 }
 
 function outfitDetails(c, L, F, shY, hipY, ol) {
+  const scarf = L.scarf || F.scarf;                    // 캐릭터마다 스카프 색을 다르게 할 수 있음
   switch (L.outfit) {
-    case "blazer": case "suit": case "teacher":
+    case "cardigan":
+      c.beginPath(); c.moveTo(-3.6, shY); c.lineTo(3.6, shY); c.lineTo(0, shY + 7); c.closePath(); fillStroke(c, F.shirt);
+      c.beginPath(); c.moveTo(-3.6, shY); c.lineTo(-0.6, shY + 11); c.moveTo(3.6, shY); c.lineTo(0.6, shY + 11); c.stroke();
+      bow(c, 0, shY + 3, 0.55, scarf);                 // 가슴 리본
+      c.fillStyle = shade(F.top, -0.35);              // 카디건 단추
+      for (let k = 0; k < 3; k++) { c.beginPath(); c.arc(0.4, shY + 9 + k * 2.6, 0.65, 0, Math.PI * 2); c.fill(); }
+      break;
+    case "blazer": case "suit": case "teacher": case "blazer_girl":
       c.beginPath(); c.moveTo(-3.4, shY); c.lineTo(3.4, shY); c.lineTo(0, shY + 6.5); c.closePath(); fillStroke(c, F.shirt);
       c.beginPath();                                   // 넥타이
       c.moveTo(-0.9, shY + 1); c.lineTo(0.9, shY + 1); c.lineTo(1.4, shY + 8.5);
@@ -210,11 +234,11 @@ function outfitDetails(c, L, F, shY, hipY, ol) {
       c.lineTo(4.6, shY + 4.4); c.lineTo(7.6, shY + 2); c.stroke(); c.restore();
       for (const s of [-1, 1]) {                       // 스카프 리본
         c.beginPath(); c.moveTo(0, shY + 8.5); c.lineTo(s * 4.2, shY + 6.3); c.lineTo(s * 3.8, shY + 10.7); c.closePath();
-        fillStroke(c, F.scarf);
+        fillStroke(c, scarf);
       }
       c.beginPath(); c.moveTo(-0.8, shY + 9.5); c.lineTo(-2, shY + 14); c.lineTo(0, shY + 13); c.lineTo(2, shY + 14); c.lineTo(0.8, shY + 9.5);
-      fillStroke(c, F.scarf);
-      c.beginPath(); c.arc(0, shY + 8.5, 1.3, 0, Math.PI * 2); fillStroke(c, F.scarf);
+      fillStroke(c, scarf);
+      c.beginPath(); c.arc(0, shY + 8.5, 1.3, 0, Math.PI * 2); fillStroke(c, scarf);
       break;
     case "gakuran":
       c.beginPath(); c.roundRect(-3.8, shY - 1, 7.6, 2.6, 1); fillStroke(c, F.top);   // 높은 깃
@@ -262,6 +286,18 @@ function backHair(c, L, swing, tor) {
     c.beginPath(); c.moveTo(-10, -12);
     c.bezierCurveTo(-24 - swing, -8, -22 - swing, 12, -15 - swing * 1.5, 22);
     c.bezierCurveTo(-16, 10, -14, -2, -6, -8); c.closePath(); fillStroke(c, col);
+  } else if (L.hair === "side") {                     // 사이드 포니테일 (한쪽으로 묶은 머리)
+    c.beginPath(); c.moveTo(12, -10);
+    c.bezierCurveTo(26 + swing, -6, 25 + swing, 10, 19 + swing * 1.5, 22);
+    c.bezierCurveTo(18, 10, 17, 0, 10, -4); c.closePath(); fillStroke(c, col);
+  } else if (L.hair === "wavy") {                     // 웨이브 롱 (물결치는 긴 머리)
+    const end = 15 + tor;
+    c.beginPath(); c.moveTo(-16, -4);
+    c.quadraticCurveTo(-22, 4, -17, 11); c.quadraticCurveTo(-23, 18, -17, 24);
+    c.quadraticCurveTo(-21 - swing * 0.5, end - 2, -14 - swing * 0.5, end);
+    c.lineTo(14 - swing * 0.5, end);
+    c.quadraticCurveTo(21 - swing * 0.5, end - 2, 17, 24); c.quadraticCurveTo(23, 18, 17, 11);
+    c.quadraticCurveTo(22, 4, 16, -4); c.closePath(); fillStroke(c, col);
   }
 }
 
@@ -326,6 +362,8 @@ function frontHair(c, L, ol) {
   if (L.ribbon && L.hair === "long") bow(c, -12, -12, 1.2, L.ribbon);
   if (L.ribbon && L.hair === "twin") { bow(c, -14, -4, 0.8, L.ribbon); bow(c, 14, -4, 0.8, L.ribbon); }
   if (L.ribbon && L.hair === "pony") bow(c, -11, -11, 0.6, L.ribbon);
+  if (L.ribbon && L.hair === "side") bow(c, 13, -9, 0.75, L.ribbon);
+  if (L.ribbon && L.hair === "wavy") bow(c, -13, -8, 0.8, L.ribbon);
 }
 
 function bow(c, x, y, s, color) {                     // 리본
@@ -337,10 +375,21 @@ function bow(c, x, y, s, color) {                     // 리본
   c.restore();
 }
 
+// 표정마다 눈썹 모양 : base = 높이, inner = 안쪽 끝, outer = 바깥쪽 끝 (+ 는 아래로)
+const BROWS = {
+  normal:    { base: 0.2,  inner: 0,    outer: 0 },
+  happy:     { base: -0.6, inner: 0,    outer: 0 },
+  surprised: { base: -2.2, inner: 0,    outer: 0 },
+  tired:     { base: 0.2,  inner: -1.4, outer: 0.8 },
+  angry:     { base: 0.4,  inner: 1.8,  outer: -1.2 },   // V 모양 (츤데레 화남)
+  blush:     { base: 0,    inner: -0.9, outer: 0.4 },
+  sad:       { base: 0.2,  inner: -1.8, outer: 1.0 },
+};
+
 function drawHead(c, L, o, ol) {
   const skin = L.skin || SKIN;
   const fx = 1.2;                    // 얼굴이 살짝 오른쪽을 보도록 이목구비를 옮김 (3/4 방향)
-  const expr = o.expr || "normal";
+  const expr = BROWS[o.expr] ? o.expr : "normal";
 
   // 얼굴형 : 둥근 이마 + 뾰족한 턱 (애니메이션 얼굴형)
   c.beginPath();
@@ -350,12 +399,15 @@ function drawHead(c, L, o, ol) {
   c.bezierCurveTo(-5.5, 13.5, -14, 7.5, -14, -1);
   c.closePath(); fillStroke(c, skin);
 
-  // 볼터치 + 빗금
-  oval(c, -6.5 + fx, 10, 3.2, 1.5, "rgba(255,120,140,0.35)");
-  oval(c, 8 + fx, 10, 3, 1.5, "rgba(255,120,140,0.35)");
-  c.save(); c.strokeStyle = "rgba(230,90,110,0.5)"; c.lineWidth = ol * 0.45;
-  for (const bx of [-7.5 + fx, 7 + fx]) for (let k = 0; k < 3; k++) {
-    c.beginPath(); c.moveTo(bx + k * 1.2, 10.8); c.lineTo(bx + k * 1.2 + 0.8, 9.2); c.stroke();
+  // 볼터치 : 부끄러울 때·화날 때는 더 진하고 넓게
+  const strong = expr === "blush" ? 1 : expr === "angry" ? 0.55 : 0;
+  const ba = 0.35 + strong * 0.3;
+  oval(c, -6.5 + fx, 10, 3.2 + strong * 1.3, 1.5 + strong * 0.6, `rgba(255,110,135,${ba})`);
+  oval(c, 8 + fx, 10, 3 + strong * 1.3, 1.5 + strong * 0.6, `rgba(255,110,135,${ba})`);
+  c.save(); c.strokeStyle = "rgba(230,80,105,0.55)"; c.lineWidth = ol * 0.45;
+  const hatch = 3 + Math.round(strong * 2);
+  for (const bx of [-7.8 + fx, 6.6 + fx]) for (let k = 0; k < hatch; k++) {
+    c.beginPath(); c.moveTo(bx + k * 1.1, 10.9); c.lineTo(bx + k * 1.1 + 0.8, 9.1); c.stroke();
   }
   c.restore();
 
@@ -371,12 +423,12 @@ function drawHead(c, L, o, ol) {
   drawEye(c, 6.4 + fx, 5.8, L, expr, o.blink, ol, 1);
 
   // 눈썹 : 앞머리 너머로 비쳐 보이게 반투명
-  c.save(); c.globalAlpha = 0.8; c.lineWidth = ol * 1.1; c.strokeStyle = shade(L.hairColor, -0.45);
-  const base = expr === "surprised" ? -2.2 : 0.2;
+  const B = BROWS[expr];
+  c.save(); c.globalAlpha = 0.85; c.lineWidth = ol * 1.15; c.strokeStyle = shade(L.hairColor, -0.45);
   for (const [bx, s] of [[-5.6 + fx, -1], [6.4 + fx, 1]]) {
     const inner = s < 0 ? bx + 2.6 : bx - 2.6, outer = s < 0 ? bx - 2.6 : bx + 2.6;
-    const yi = base + (expr === "tired" ? -1.4 : 0), yo = base + (expr === "tired" ? 0.8 : 0);
-    c.beginPath(); c.moveTo(outer, yo); c.quadraticCurveTo(bx, base - 1.3, inner, yi); c.stroke();
+    c.beginPath(); c.moveTo(outer, B.base + B.outer);
+    c.quadraticCurveTo(bx, B.base - 1.3, inner, B.base + B.inner); c.stroke();
   }
   c.restore();
 
@@ -391,14 +443,22 @@ function drawHead(c, L, o, ol) {
     c.restore();
   }
 
-  if (expr === "tired") {                             // 땀방울
+  if (expr === "tired" || expr === "blush") {         // 땀방울
     c.beginPath(); c.moveTo(15, -4); c.quadraticCurveTo(17.5, 0, 15.5, 1.5); c.quadraticCurveTo(13.5, 0, 15, -4);
     c.save(); c.lineWidth = ol * 0.6; fillStroke(c, "#9fd8ff"); c.restore();
+  }
+  if (expr === "angry") {                             // 화남 표시 (이마의 십자 핏대)
+    c.save(); c.strokeStyle = "#ff4d5e"; c.lineWidth = ol * 1.1;
+    for (const [dx, dy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+      c.beginPath(); c.moveTo(-9 + dx * 0.6, -11 + dy * 0.6); c.quadraticCurveTo(-9 + dx * 2.4, -11 + dy * 0.4, -9 + dx * 2.6, -11 + dy * 2.4); c.stroke();
+    }
+    c.restore();
   }
 }
 
 function drawEye(c, cx, cy, L, expr, blink, ol, side) {
   const w = 6.4, h = 8;
+  const skin = L.skin || SKIN;
   c.save();
   c.strokeStyle = OUTLINE;
   if (blink) {                                        // 깜빡임 : 아래로 휜 선
@@ -411,7 +471,9 @@ function drawEye(c, cx, cy, L, expr, blink, ol, side) {
     c.beginPath(); c.moveTo(cx - w / 2, cy + 1.5); c.quadraticCurveTo(cx, cy - 3, cx + w / 2, cy + 1.5); c.stroke();
     c.restore(); return;
   }
-  const tired = expr === "tired", surprised = expr === "surprised";
+  const surprised = expr === "surprised";
+  // 눈꺼풀이 내려온 정도 (눈 높이에 대한 비율)
+  const cover = { tired: 0.46, angry: 0.24, sad: 0.14, blush: 0.06 }[expr] || 0;
 
   // 흰자
   c.beginPath(); c.ellipse(cx, cy, w / 2, h / 2, 0, 0, Math.PI * 2);
@@ -424,28 +486,41 @@ function drawEye(c, cx, cy, L, expr, blink, ol, side) {
   g.addColorStop(0, shade(L.eye, -0.6));
   g.addColorStop(0.55, L.eye);
   g.addColorStop(1, shade(L.eye, 0.5));
-  c.beginPath(); c.ellipse(cx + 0.4, cy + 0.6, w * ir, h * (ir + 0.06), 0, 0, Math.PI * 2);
+  const look = expr === "blush" ? -0.8 * side : 0;    // 부끄러우면 시선을 살짝 피함
+  c.beginPath(); c.ellipse(cx + 0.4 + look, cy + 0.6, w * ir, h * (ir + 0.06), 0, 0, Math.PI * 2);
   c.fillStyle = g; c.fill();
-  oval(c, cx + 0.4, cy + 0.9, w * ir * 0.45, h * ir * 0.5, shade(L.eye, -0.7));   // 동공
-  // 반짝임 (큰 것 하나 + 작은 것 하나)
-  oval(c, cx - 0.8, cy - 1.2, surprised ? 1.1 : 1.4, surprised ? 1.1 : 1.4, "#ffffff");
-  oval(c, cx + 1.4, cy + 2.2, 0.6, 0.6, "#ffffff");
-  if (tired) { c.fillStyle = L.skin || SKIN; c.fillRect(cx - w, cy - h, w * 2, h * 0.92); }  // 반쯤 감긴 눈꺼풀
+  oval(c, cx + 0.4 + look, cy + 0.9, w * ir * 0.45, h * ir * 0.5, shade(L.eye, -0.7));   // 동공
+  // 반짝임 (큰 것 하나 + 작은 것 하나). 슬플 때는 촉촉하게 더 크게
+  const big = surprised ? 1.1 : expr === "sad" ? 1.7 : 1.4;
+  oval(c, cx - 0.8 + look, cy - 1.2, big, big, "#ffffff");
+  oval(c, cx + 1.4 + look, cy + 2.2, expr === "sad" ? 0.9 : 0.6, expr === "sad" ? 0.9 : 0.6, "#ffffff");
+  if (cover) { c.fillStyle = skin; c.fillRect(cx - w, cy - h, w * 2, h / 2 + h * cover); }   // 내려온 눈꺼풀
   c.restore();
 
   // 윗속눈썹 (굵게) + 눈꼬리
-  const lidL = tired ? cy - 0.2 : cy - h * 0.12;
-  const lidR = tired ? cy - 0.2 : cy - h * 0.28;
-  const lidTop = tired ? cy - 0.4 : cy - h / 2 - 1.2;
+  const top = cy - h / 2;
+  let yIn, yOut, yMid;
+  if (cover) {
+    const lid = top + h * cover;
+    yIn = lid + 0.4 + (expr === "angry" ? 1.1 : 0);   // 화나면 안쪽 끝이 내려감
+    yOut = lid + 0.4 - (expr === "sad" ? -0.8 : 0);
+    yMid = lid - 0.4;
+  } else {
+    yIn = cy - h * 0.12; yOut = cy - h * 0.28; yMid = top - 1.2;
+  }
+  const xIn = side > 0 ? cx - w / 2 - 0.5 : cx + w / 2 + 0.5;
+  const xOut = side > 0 ? cx + w / 2 + 0.5 : cx - w / 2 - 0.5;
   c.lineWidth = ol * 1.9;
-  c.beginPath(); c.moveTo(cx - w / 2 - 0.5, side > 0 ? lidL : lidR);
-  c.quadraticCurveTo(cx - 0.3, lidTop, cx + w / 2 + 0.5, side > 0 ? lidR : lidL); c.stroke();
-  const ox = side > 0 ? cx + w / 2 + 0.5 : cx - w / 2 - 0.5;
+  c.beginPath(); c.moveTo(xIn, yIn); c.quadraticCurveTo(cx - 0.3, yMid, xOut, yOut); c.stroke();
   c.lineWidth = ol * 1.2;
-  c.beginPath(); c.moveTo(ox, lidR); c.lineTo(ox + side * 1.5, lidR - 1.2); c.stroke();
+  c.beginPath(); c.moveTo(xOut, yOut); c.lineTo(xOut + side * 1.5, yOut - 1.2); c.stroke();
   // 아랫선
   c.lineWidth = ol * 0.6;
   c.beginPath(); c.moveTo(cx - w * 0.22, cy + h / 2 - 0.2); c.lineTo(cx + w * 0.22, cy + h / 2 - 0.2); c.stroke();
+  if (expr === "sad") {                               // 눈가에 맺힌 눈물
+    c.strokeStyle = "rgba(120,190,255,0.9)"; c.lineWidth = ol * 0.9;
+    c.beginPath(); c.moveTo(cx - w * 0.35, cy + h / 2 + 0.4); c.quadraticCurveTo(cx, cy + h / 2 + 1.3, cx + w * 0.35, cy + h / 2 + 0.4); c.stroke();
+  }
   c.restore();
 }
 
@@ -457,9 +532,16 @@ function drawMouth(c, x, y, expr, ol) {
     oval(c, x, y + 1.6, 1.2, 0.7, "#ff8fa3");
   } else if (expr === "surprised") {                  // 동그란 입
     c.beginPath(); c.ellipse(x, y + 0.5, 1.3, 1.8, 0, 0, Math.PI * 2); fillStroke(c, "#c8475b");
-  } else if (expr === "tired") {                      // 물결 입
-    c.beginPath(); c.moveTo(x - 2.2, y); c.quadraticCurveTo(x - 1.1, y - 1, x, y);
-    c.quadraticCurveTo(x + 1.1, y + 1, x + 2.2, y); c.stroke();
+  } else if (expr === "angry") {                      // 소리치는 입 (위로 볼록)
+    c.beginPath(); c.moveTo(x - 2.3, y + 1); c.quadraticCurveTo(x, y - 2, x + 2.3, y + 1); c.closePath();
+    fillStroke(c, "#c8475b");
+    c.fillStyle = "#ffffff"; c.fillRect(x - 1.2, y - 0.6, 2.4, 0.6);   // 이빨
+  } else if (expr === "tired" || expr === "blush") {  // 물결 입
+    const k = expr === "blush" ? 0.75 : 1;
+    c.beginPath(); c.moveTo(x - 2.2 * k, y); c.quadraticCurveTo(x - 1.1 * k, y - 1, x, y);
+    c.quadraticCurveTo(x + 1.1 * k, y + 1, x + 2.2 * k, y); c.stroke();
+  } else if (expr === "sad") {                        // 아래로 처진 입
+    c.beginPath(); c.moveTo(x - 1.8, y + 0.9); c.quadraticCurveTo(x, y - 0.9, x + 1.8, y + 0.9); c.stroke();
   } else {
     c.beginPath(); c.moveTo(x - 1.6, y); c.quadraticCurveTo(x, y + 1.2, x + 1.6, y); c.stroke();
   }

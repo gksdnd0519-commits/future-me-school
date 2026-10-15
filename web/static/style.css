@@ -337,3 +337,113 @@ kbd {
   .tp { display: none; }
   .ep { display: none; }
 }
+
+/* =============================================================
+   미연시 업데이트 (장면 · 선택지 · 수첩 · 날짜 카드 · 시작 화면)
+   ============================================================= */
+.day { font-size: 0.85em; color: #ffb3d6; }
+
+/* ----- 미연시 장면 ----- */
+.vn { position: absolute; inset: 0; z-index: 5; cursor: pointer; }
+#vn-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.vn-box {
+  position: absolute; left: 3%; right: 3%; bottom: 3%; height: 26%;
+  background: linear-gradient(180deg, #2b2650e8, #1b1930f2);
+  border: 3px solid #fff; border-radius: 1.1em;
+  box-shadow: 0 0 0 3px #ff8fbf, 0 12px 30px #000a;
+  padding: 1.5em 1.6em 1em 1.6em;
+}
+.vn-box:has(.vn-face:not(.hidden)) { padding-left: 9.5em; }
+.vn-face {
+  position: absolute; left: 0.8em; bottom: 0.6em; width: 7.8em; height: 7.8em;
+  border-radius: 1em; background: radial-gradient(circle at 50% 35%, #fff6e6, #dcd4ff);
+  border: 2px solid #ffffff66;
+}
+.vn-name {
+  position: absolute; top: -1em; left: 1.4em;
+  padding: 0.2em 1.1em; border-radius: 0.6em; color: #fff; font-size: 1.15em;
+  border: 2px solid #fff; box-shadow: 0 3px 0 #0005; text-shadow: 0 2px 0 #0007;
+}
+.vn-box:has(.vn-face:not(.hidden)) .vn-name { left: 8.6em; }
+.vn-text { font-family: var(--text-font); font-size: 1.22em; line-height: 1.65; color: #fff; white-space: pre-wrap; }
+.vn-box.narr .vn-text { color: #d9d3ff; font-style: italic; text-align: center; padding-top: 0.6em; }
+.vn-next { position: absolute; right: 1.1em; bottom: 2.2em; color: #ffc94a; opacity: 0; }
+.vn-box.done .vn-next { opacity: 1; animation: float2 0.6s infinite alternate; }
+.vn-tools { position: absolute; right: 0.8em; bottom: 0.5em; display: flex; gap: 0.3em; }
+.vn-tools button {
+  font: inherit; font-size: 0.7em; cursor: pointer; color: #d9d3ff;
+  background: #ffffff14; border: 1px solid #ffffff33; border-radius: 0.4em; padding: 0.15em 0.6em;
+}
+.vn-tools button.on { background: #ff8fbf; color: #1b1930; border-color: #fff; }
+.vn-choices {
+  position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%);
+  display: grid; gap: 0.6em; width: min(30em, 80%); z-index: 2;
+}
+.vn-choice {
+  font: inherit; font-size: 1.1em; cursor: pointer; text-align: left; color: #2a2742;
+  background: linear-gradient(180deg, #ffffff, #ffe9f4); border: 3px solid #ff8fbf; border-radius: 0.8em;
+  padding: 0.6em 1em; box-shadow: 0 6px 16px #0007; animation: menuIn 0.25s ease-out;
+  display: flex; gap: 0.7em; align-items: center;
+}
+.vn-choice:hover { transform: scale(1.03); background: #fff; border-color: #ff5c9e; }
+.vn-choice .num { background: #ff8fbf; color: #fff; border-radius: 0.4em; padding: 0 0.5em; }
+@keyframes menuIn { from { transform: translateY(14px); opacity: 0; } }
+.vn-log { position: absolute; inset: 4%; background: #12101ff2; border: 2px solid #ffffff33; border-radius: 1em; padding: 1em; z-index: 4; display: flex; flex-direction: column; }
+.vn-log-title { color: #ffc94a; margin-bottom: 0.5em; }
+.vn-log-list { overflow-y: auto; font-family: var(--text-font); }
+.vn-log-list .lg { display: grid; grid-template-columns: 7em 1fr; gap: 0.6em; padding: 0.3em 0; border-bottom: 1px dashed #ffffff1a; }
+.vn-log-list b { color: #ff8fbf; text-align: right; font-family: var(--game-font); font-weight: normal; }
+
+/* ----- 날짜 카드 ----- */
+.daycard {
+  position: absolute; inset: 0; z-index: 6; display: grid; place-content: center; text-align: center;
+  background: radial-gradient(circle, #2b2650, #0d0b1a); pointer-events: none;
+}
+.daycard-day { font-size: 4em; color: #fff; text-shadow: 0 0 30px #ff8fbf, 0 5px 0 #000; }
+.daycard-dday { font-size: 1.6em; color: #ffc94a; margin-top: 0.2em; }
+.daycard.show .daycard-day { animation: gradeIn 0.8s cubic-bezier(.3,1.6,.5,1); }
+.daycard.show { animation: cardFade 2.2s ease forwards; }
+@keyframes cardFade { 0% { opacity: 0; } 15% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
+
+/* ----- 호감도 수첩 ----- */
+.notebook-box { max-width: 52em; width: 96%; text-align: left; }
+.notebook-box h2 { text-align: center; }
+.nb-grid { display: grid; gap: 0.6em; }
+.nb-card {
+  display: flex; gap: 0.8em; align-items: center;
+  background: #ffffff0d; border-left: 0.4em solid var(--c); border-radius: 0.7em; padding: 0.5em 0.8em;
+}
+.nb-face { width: 5.5em; height: 5.5em; flex: none; border-radius: 50%; background: radial-gradient(circle at 50% 35%, #fff6e6, #ffd9ec); }
+.nb-name { font-size: 1.15em; }
+.nb-name small { color: var(--muted); font-size: 0.7em; }
+.nb-hearts { color: #ff7ab8; letter-spacing: 0.1em; }
+.nb-hearts small { color: var(--muted); letter-spacing: 0; }
+.nb-place, .nb-profile, .nb-next { font-family: var(--text-font); font-size: 0.82em; color: #ddd8ff; }
+.nb-profile { color: var(--muted); margin: 0.15em 0; }
+.nb-next.ready { color: #ff8fbf; font-weight: bold; }
+.nb-endings, .title-endings, .ending-collect { text-align: center; color: #ffc94a; margin: 0.6em 0; font-size: 0.9em; }
+.big-btn.small { font-size: 1em; display: block; margin: 0.4em auto 0; }
+
+/* ----- 시작 화면 ----- */
+.title-heroines { display: flex; justify-content: center; gap: 0.5em; margin: 0.6em 0; flex-wrap: wrap; }
+.th-item { width: 5.2em; text-align: center; line-height: 1.15; }
+.th-item canvas { display: block; width: 5.2em; height: 5.2em; border-radius: 50%; background: radial-gradient(circle at 50% 35%, #fff6e6, #ffe0ef); border: 3px solid var(--c); }
+.th-item b { display: block; margin-top: 0.2em; color: #fff; }
+.th-item small { font-size: 0.6em; color: var(--muted); }
+.title-loading { color: var(--muted); }
+.name-field { display: block; margin: 0.4em 0; color: #ddd8ff; }
+.name-field input {
+  font: inherit; width: 8em; text-align: center; margin-left: 0.4em;
+  background: #ffffff14; color: #fff; border: 2px solid #ff8fbf; border-radius: 0.5em; padding: 0.2em 0.5em;
+}
+.title-btn-row { display: flex; gap: 0.6em; justify-content: center; flex-wrap: wrap; }
+.title-box { max-width: 34em; }
+.title-box .logo { font-size: 2.3em; }
+
+/* ----- 엔딩 ----- */
+.ending-title { font-size: 1.5em; color: #fff; margin: 0.2em 0; }
+.grade-row { color: var(--muted); }
+.grade-row .grade-badge { font-size: 2.6em; display: inline-block; vertical-align: middle; }
+.ending-hearts { display: flex; flex-wrap: wrap; gap: 0.4em; justify-content: center; margin: 0.4em 0; }
+.ending-hearts span { border: 2px solid var(--c); border-radius: 0.5em; padding: 0.1em 0.5em; font-size: 0.85em; }
+.tool.hot2 { background: #ff8fbf; color: #1b1930; border-color: #ffd1e6; }
