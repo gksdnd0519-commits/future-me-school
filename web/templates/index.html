@@ -66,6 +66,7 @@
             <button id="vn-auto" title="자동 진행 (A)">AUTO</button>
             <button id="vn-skip" title="빨리 넘기기 (Ctrl 누르고 있기)">SKIP</button>
             <button id="vn-logbtn" title="지난 대사 (L)">LOG</button>
+            <button id="vn-voice" title="더빙 켜기/끄기 (V)">VOICE</button>
           </div>
         </div>
         <div id="vn-log" class="vn-log hidden">
@@ -113,6 +114,7 @@
             </div>
           </div>
           <div id="title-endings" class="title-endings"></div>
+          <div class="title-note">🎙 캐릭터 더빙은 <b>Edge 브라우저</b>에서 가장 자연스럽게 들려요 (V 키로 켜고 끄기)</div>
         </div>
       </div>
 
@@ -128,7 +130,7 @@
             <tr><td><kbd>Tab</kbd></td><td>📒 호감도 수첩</td></tr>
             <tr><td><kbd>U</kbd></td><td>↩ 되돌리기</td></tr>
             <tr><td><kbd>Q</kbd> / <kbd>F</kbd></td><td>🔄 역할 바꾸기 (돌발 재현) / 해결 기능 켜고 끄기</td></tr>
-            <tr><td><kbd>M</kbd></td><td>🔊 소리</td></tr>
+            <tr><td><kbd>V</kbd> / <kbd>M</kbd></td><td>🎙 더빙 목소리 / 🔊 효과음</td></tr>
           </table>
           <h2>💗 공략 방법</h2>
           <ul class="rules">
@@ -165,6 +167,7 @@
       <button id="btn-undo"  class="tool">↩ 되돌리기 <kbd>U</kbd></button>
       <button id="btn-swap"  class="tool hot">🔄 역할 바꾸기 <kbd>Q</kbd></button>
       <label class="tool switch"><input type="checkbox" id="fix-toggle" checked> 해결 기능 <kbd>F</kbd></label>
+      <button id="btn-voice" class="tool">🎙 더빙 <kbd>V</kbd></button>
       <button id="btn-mute"  class="tool">🔊 소리 <kbd>M</kbd></button>
       <button id="btn-help"  class="tool">❓ 도움말 <kbd>H</kbd></button>
       <button id="btn-reset" class="tool">🏠 시작 화면</button>
@@ -178,6 +181,7 @@
 
   <script src="{{ url_for('static', filename='anime.js') }}"></script>
   <script src="{{ url_for('static', filename='scene-bg.js') }}"></script>
+  <script src="{{ url_for('static', filename='voice.js') }}"></script>
   <script src="{{ url_for('static', filename='game.js') }}"></script>
 </body>
 </html>

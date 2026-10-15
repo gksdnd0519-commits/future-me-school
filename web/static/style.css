@@ -447,3 +447,7 @@ kbd {
 .ending-hearts { display: flex; flex-wrap: wrap; gap: 0.4em; justify-content: center; margin: 0.4em 0; }
 .ending-hearts span { border: 2px solid var(--c); border-radius: 0.5em; padding: 0.1em 0.5em; font-size: 0.85em; }
 .tool.hot2 { background: #ff8fbf; color: #1b1930; border-color: #ffd1e6; }
+
+/* ----- 더빙 안내 ----- */
+.title-note { font-family: var(--text-font); font-size: 0.78em; color: var(--muted); margin-top: 0.3em; }
+.title-note b { color: #9fd8ff; }

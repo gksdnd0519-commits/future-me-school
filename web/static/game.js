@@ -254,6 +254,7 @@ const vn = {
   speaker: null, lastOther: null,
   choosing: null,            // 선택지를 고르는 중이면 그 선택지 목록
   auto: false, skip: false, autoT: 0, skipT: 0,
+  voiceDone: true,           // 이번 대사의 더빙이 끝났는지
 };
 const backlog = [];           // 지나간 대사 기록 (L 키)
 
@@ -304,9 +305,14 @@ function showVnLine() {
       s = { key: who, expr: "normal", alpha: 0, blinkT: rand(1, 3), x: null };
       vn.stage.push(s);
     }
+    if (s.expr !== (line.expr || "normal") || s.motionT === undefined) s.motionT = 0;   // 표정이 바뀌면 감정 동작 다시
     s.expr = line.expr || "normal";
     vn.lastOther = who;
   }
+  // 🎙 더빙 : 스킵 중이 아니면 이 대사를 캐릭터 목소리로 읽는다
+  vn.voiceDone = false;
+  if (!vn.skip) Voice.speakLine(fill(line.text), who, () => { vn.voiceDone = true; });
+  else vn.voiceDone = true;
   backlog.push({ name: narr ? "" : castName(who), text: fill(line.text) });
   if (backlog.length > 300) backlog.shift();
 }
@@ -357,6 +363,7 @@ function advanceVn() {
 }
 
 function closeScene() {
+  Voice.stop();
   vn.open = false;
   vn.auto = false;
   if (!$("vn-skip").classList.contains("on")) vn.skip = false;
@@ -372,6 +379,7 @@ function closeScene() {
 function updateVn(dt) {
   if (!vn.open) return;
   for (const s of vn.stage) {
+    s.motionT = (s.motionT || 0) + dt;
     s.alpha = Math.min(1, s.alpha + dt * 5);
     s.blinkT -= dt;
     if (s.blinkT < -0.13) s.blinkT = rand(2, 5);
@@ -391,13 +399,29 @@ function updateVn(dt) {
     const now = Math.floor(vn.chars);
     if (now !== before) {
       $("vn-text").textContent = text.slice(0, now);
-      if (now % 2 === 0 && vn.speaker !== "narr" && text[now - 1] !== " ")
+      const dubbing = Voice.enabled && Voice.hasVoices() && vn.speaker !== "narr";
+      if (!dubbing && now % 2 === 0 && vn.speaker !== "narr" && text[now - 1] !== " ")
         SFX.blip(VOICE[vn.speaker] || (CAST[vn.speaker === "me" ? "student" : vn.speaker] || {}).voice || 500);
       if (now >= text.length) $("vn-box").classList.add("done");
     }
-  } else if (vn.auto) {                            // 오토 : 글이 다 나오고 잠시 뒤 자동 진행
+  } else if (vn.auto) {                            // 오토 : 글이 다 나오고 (더빙도 끝나면) 잠시 뒤 자동 진행
+    if (!vn.voiceDone && Voice.speaking()) { vn.autoT = 0; return; }
     vn.autoT += dt;
-    if (vn.autoT > 1.1 + text.length * 0.035) advanceVn();
+    if (vn.autoT > (Voice.enabled && Voice.hasVoices() ? 0.6 : 1.1 + text.length * 0.035)) advanceVn();
+  }
+}
+
+// 감정에 따른 몸 동작 : t = 표정이 바뀐 뒤 흐른 시간(초). 돌려주는 값 = 위치 이동과 기울기
+function emotionMotion(expr, t) {
+  const fade = (len) => Math.max(0, 1 - t / len);
+  switch (expr) {
+    case "surprised": return { x: 0, y: -Math.sin(Math.min(1, t / 0.35) * Math.PI) * 34, rot: 0 };          // 깡충!
+    case "angry":     return { x: Math.sin(t * 55) * 6 * fade(0.6), y: 0, rot: 0 };                            // 부들부들
+    case "happy":     return { x: 0, y: -Math.abs(Math.sin(t * 9)) * 12 * fade(0.7), rot: 0 };                  // 통통
+    case "sad":       return { x: 0, y: 14 * Math.min(1, t / 0.6), rot: 0 };                                     // 축 처짐
+    case "tired":     return { x: 0, y: 8 * Math.min(1, t / 0.5), rot: Math.sin(t * 1.5) * 0.01 };               // 휘청
+    case "blush":     return { x: Math.sin(t * 3) * 5, y: 0, rot: Math.sin(t * 3) * 0.025 };                    // 살랑살랑
+    default:          return { x: 0, y: 0, rot: 0 };
   }
 }
 
@@ -413,6 +437,14 @@ function drawVn() {
   const s = wpx / W;
   vctx.setTransform(s, 0, 0, s, 0, 0);
   drawSceneBg(vctx, vn.bg, clockTime);
+  // 주인공이 말하는 중이면 대화창 얼굴도 입을 움직임
+  if (vn.speaker === "me" && !vn.choosing) {
+    const line = vn.lines[vn.i];
+    const typing = line && line.text && vn.chars < fill(line.text).length;
+    const on = typing || (Voice.speaking() && !vn.voiceDone);
+    drawPortrait($("vn-face"), LOOKS.student, (line && line.expr) || "normal",
+                 { talk: on ? Math.abs(Math.sin(clockTime * 13)) : 0, blink: Math.sin(clockTime * 2.1) > 0.97 });
+  }
 
   const n = vn.stage.length;
   vn.stage.forEach((st, i) => {
@@ -420,15 +452,24 @@ function drawVn() {
     const tall = L.legLen + L.torso + 33;
     const S = (470 / tall) * (["future", "kim", "han"].includes(st.key) ? 1.06 : 1);
     const targetX = n === 1 ? 480 : i === 0 ? 300 : 660;
-    st.x = st.x === null ? targetX : st.x + (targetX - st.x) * 0.15;
+    // 처음 등장할 때는 옆에서 미끄러져 들어온다
+    st.x = st.x === null ? targetX + (targetX < 480 ? -90 : 90) : st.x + (targetX - st.x) * 0.15;
     const speaking = st.key === vn.speaker;
     const breath = 1 + Math.sin(clockTime * 2 + i) * 0.006;
+    const m = emotionMotion(st.expr, st.motionT || 0);
+    // 립싱크 : 글자가 나오는 중이거나 목소리가 나오는 동안 입을 여닫는다
+    const line = vn.lines[vn.i];
+    const typing = line && line.text && vn.chars < fill(line.text).length;
+    const mouthOn = speaking && (typing || (Voice.speaking() && !vn.voiceDone));
+    const talk = mouthOn ? Math.abs(Math.sin(clockTime * 13)) * (0.6 + 0.4 * Math.sin(clockTime * 5.3)) : 0;
     vctx.save();
     vctx.globalAlpha = st.alpha;
     if (!speaking && vn.speaker !== "narr") vctx.filter = "brightness(0.62)";   // 말하지 않는 사람은 어둡게
-    vctx.translate(st.x, 640 + (speaking ? 0 : 8));
+    vctx.translate(st.x + m.x, 640 + (speaking ? 0 : 8) + m.y);
+    vctx.rotate(m.rot);
     vctx.scale(S * (n === 2 && i === 1 ? -1 : 1), S * breath);              // 오른쪽 사람은 왼쪽을 보게
-    drawFigure(vctx, L, { expr: st.expr, blink: st.blinkT < 0, ol: 0.5 });
+    drawFigure(vctx, L, { expr: st.expr, blink: st.blinkT < 0, ol: 0.5, talk,
+                          sway: Math.sin(clockTime * 1.7 + i * 2) * 0.9 });
     vctx.restore();
   });
 }
@@ -869,6 +910,7 @@ window.addEventListener("blur", () => { keys.clear(); if (!$("vn-skip").classLis
 
 function onKey(code) {
   if (code === "KeyM") return toggleMute();
+  if (code === "KeyV") return toggleVoice();
   if (mode === "title") { if (code === "Enter") startGame(!(server && server.intro_done && !server.ended)); return; }
   if (mode === "help") { if (["KeyH", "Escape", "Enter"].includes(code)) toggleHelp(); return; }
   if (mode === "notebook") { if (["Tab", "KeyP", "Escape"].includes(code)) closeNotebook(); return; }
@@ -1454,6 +1496,24 @@ function toggleHelp() {
   if (mode === "help") { help.classList.add("hidden"); mode = helpReturn; }
   else { if (mode === "menu") closeMenu(false); helpReturn = mode; help.classList.remove("hidden"); mode = "help"; }
 }
+// 🎙 더빙 켜기/끄기 (설정은 브라우저에 기억)
+function toggleVoice() {
+  Voice.enabled = !Voice.enabled;
+  try { localStorage.setItem("future-me-school-voice", Voice.enabled ? "1" : "0"); } catch (e) {}
+  paintVoice();
+  if (!Voice.enabled) toast("🔇 더빙 꺼짐");
+  else if (Voice.hasVoices()) toast(`🎙 더빙 켜짐 (여: ${Voice.voiceName("f")} / 남: ${Voice.voiceName("m")})`, "good");
+  else toast("🎙 더빙 켜짐 — 이 브라우저에는 한국어 음성이 없어요. Edge 브라우저를 추천해요.", "danger");
+}
+function paintVoice() {
+  $("btn-voice").innerHTML = `${Voice.enabled ? "🎙" : "🔇"} 더빙 <kbd>V</kbd>`;
+  $("vn-voice").classList.toggle("on", Voice.enabled);
+}
+function loadVoicePref() {
+  try { const v = localStorage.getItem("future-me-school-voice"); if (v !== null) Voice.enabled = v === "1"; } catch (e) {}
+  paintVoice();
+}
+
 function toggleMute() {
   muted = !muted;
   $("btn-mute").innerHTML = `${muted ? "🔇" : "🔊"} 소리 <kbd>M</kbd>`;
@@ -1498,6 +1558,8 @@ $("vn").onclick = (e) => { if (!e.target.closest("button")) advanceVn(); };
 $("vn-auto").onclick = (e) => { e.stopPropagation(); toggleAuto(); };
 $("vn-skip").onclick = (e) => { e.stopPropagation(); toggleSkip(); };
 $("vn-logbtn").onclick = (e) => { e.stopPropagation(); toggleLog(); };
+$("vn-voice").onclick = (e) => { e.stopPropagation(); toggleVoice(); };
+$("btn-voice").onclick = toggleVoice;
 $("vn-log").onclick = (e) => { e.stopPropagation(); toggleLog(); };
 document.querySelectorAll("#toolbar button, #toolbar input, .vn-tools button").forEach((el) =>
   el.addEventListener("click", () => el.blur()));
@@ -1521,6 +1583,7 @@ function loop(now) {
 
 (async function boot() {
   resize();
+  loadVoicePref();
   requestAnimationFrame(loop);
   try {
     await loadStory();

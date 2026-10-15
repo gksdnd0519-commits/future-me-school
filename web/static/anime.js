@@ -115,7 +115,8 @@ function drawFigure(c, L, o = {}) {
   c.strokeStyle = OUTLINE;
 
   // 1) 뒷머리 (긴 머리·양갈래는 몸 뒤로 내려옴)
-  c.save(); c.translate(0, headY); backHair(c, L, swing, tor); c.restore();
+  // 뒷머리 흔들림 : 걸을 때는 걸음에 맞춰, 서 있을 때는 바람에 살랑 (o.sway)
+  c.save(); c.translate(0, headY); backHair(c, L, o.moving ? swing : (o.sway || 0), tor); c.restore();
 
   // 2) 가방 (등 뒤)
   if (L.bag === "backpack") {
@@ -415,7 +416,7 @@ function drawHead(c, L, o, ol) {
   c.save(); c.lineWidth = ol * 0.6; c.strokeStyle = "#d9a08a";
   c.beginPath(); c.moveTo(fx + 1.8, 8.3); c.lineTo(fx + 2.4, 9.4); c.stroke(); c.restore();
 
-  drawMouth(c, fx + 1.5, 12, expr, ol);
+  drawMouth(c, fx + 1.5, 12, expr, ol, o.talk || 0);
   frontHair(c, L, ol);
 
   // 눈은 앞머리 위에 그려서 항상 잘 보이게 (애니메이션식 표현)
@@ -524,14 +525,20 @@ function drawEye(c, cx, cy, L, expr, blink, ol, side) {
   c.restore();
 }
 
-function drawMouth(c, x, y, expr, ol) {
+// talk : 말하는 중 입이 벌어진 정도 (0 = 닫힘 ~ 1 = 크게) → 립싱크
+function drawMouth(c, x, y, expr, ol, talk = 0) {
   c.save(); c.lineWidth = ol * 0.9; c.strokeStyle = OUTLINE;
-  if (expr === "happy") {                             // 활짝 웃는 입
-    c.beginPath(); c.moveTo(x - 2.4, y - 0.6); c.quadraticCurveTo(x, y + 3.8, x + 2.4, y - 0.6); c.closePath();
+  if (expr === "happy") {                             // 활짝 웃는 입 (말하면 위아래로 움직임)
+    const k = 0.55 + talk * 0.6;
+    c.beginPath(); c.moveTo(x - 2.4, y - 0.6); c.quadraticCurveTo(x, y - 0.6 + 4.4 * k, x + 2.4, y - 0.6); c.closePath();
     fillStroke(c, "#c8475b");
-    oval(c, x, y + 1.6, 1.2, 0.7, "#ff8fa3");
+    oval(c, x, y - 0.6 + 2.2 * k, 1.2, 0.7 * k, "#ff8fa3");
   } else if (expr === "surprised") {                  // 동그란 입
-    c.beginPath(); c.ellipse(x, y + 0.5, 1.3, 1.8, 0, 0, Math.PI * 2); fillStroke(c, "#c8475b");
+    c.beginPath(); c.ellipse(x, y + 0.5, 1.3, 1.4 + talk * 0.8, 0, 0, Math.PI * 2); fillStroke(c, "#c8475b");
+  } else if (talk > 0.12) {                           // 그 밖의 표정 : 말하는 동안 벌어진 입
+    const w = expr === "angry" ? 2.3 : expr === "blush" || expr === "sad" ? 1.3 : 1.7;
+    c.beginPath(); c.ellipse(x, y + 0.4, w, 0.35 + talk * 1.5, 0, 0, Math.PI * 2); fillStroke(c, "#c8475b");
+    if (talk > 0.5) oval(c, x, y + 0.4 + talk * 0.8, w * 0.55, 0.4, "#ff8fa3");
   } else if (expr === "angry") {                      // 소리치는 입 (위로 볼록)
     c.beginPath(); c.moveTo(x - 2.3, y + 1); c.quadraticCurveTo(x, y - 2, x + 2.3, y + 1); c.closePath();
     fillStroke(c, "#c8475b");
@@ -552,11 +559,12 @@ function drawMouth(c, x, y, expr, ol) {
 // =============================================================
 // 초상화 : 캔버스 하나에 캐릭터의 상반신을 크게 그린다
 // =============================================================
-function drawPortrait(canvas, look, expr = "normal") {
+// extra : 립싱크(talk)·눈 깜빡임(blink) 같은 추가 옵션
+function drawPortrait(canvas, look, expr = "normal", extra = {}) {
   const dpr = Math.min(2, window.devicePixelRatio || 1);
   const size = canvas.clientWidth || 160;
-  canvas.width = Math.round(size * dpr);
-  canvas.height = Math.round(size * dpr);
+  const px = Math.round(size * dpr);
+  if (canvas.width !== px) { canvas.width = px; canvas.height = px; }   // 크기가 바뀔 때만 새로 정함
   const c = canvas.getContext("2d");
   c.setTransform(1, 0, 0, 1, 0, 0);
   c.clearRect(0, 0, canvas.width, canvas.height);
@@ -564,5 +572,5 @@ function drawPortrait(canvas, look, expr = "normal") {
   const headY = -leg - tor - 14.5;
   const S = canvas.width / 54;                        // 가로 54칸 분량을 캔버스 크기에 맞춤
   c.setTransform(S, 0, 0, S, canvas.width / 2, (-headY + 28) * S);   // 머리 위 아호게까지 보이게
-  drawFigure(c, look, { expr, ol: 0.45 });
+  drawFigure(c, look, { expr, ol: 0.45, ...extra });
 }
