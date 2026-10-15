@@ -411,6 +411,9 @@ function updateVn(dt) {
   }
 }
 
+// 감정 아이콘 (그림 캐릭터용)
+const MANPU = { angry: "💢", surprised: "❗", happy: "♪", sad: "💧", tired: "💦", blush: "💗" };
+
 // 감정에 따른 몸 동작 : t = 표정이 바뀐 뒤 흐른 시간(초). 돌려주는 값 = 위치 이동과 기울기
 function emotionMotion(expr, t) {
   const fade = (len) => Math.max(0, 1 - t / len);
@@ -449,7 +452,10 @@ function drawVn() {
   const n = vn.stage.length;
   vn.stage.forEach((st, i) => {
     const L = LOOKS[st.key];
-    const S = 8.2;                                    // 모두 같은 배율 → 키 차이가 그대로 보임 (무릎 아래는 화면 밖)
+    const sprite = hasSprite(L);
+    // 그림 캐릭터는 전신이 보이게, 코드 그림은 허리 위로 크게 (모두 같은 배율 → 키 차이가 그대로 보임)
+    const S = sprite ? 5.5 : 8.2;
+    const feetY = sprite ? 612 : 880;
     const targetX = n === 1 ? 480 : i === 0 ? 300 : 660;
     // 처음 등장할 때는 옆에서 미끄러져 들어온다
     st.x = st.x === null ? targetX + (targetX < 480 ? -90 : 90) : st.x + (targetX - st.x) * 0.15;
@@ -464,12 +470,27 @@ function drawVn() {
     vctx.save();
     vctx.globalAlpha = st.alpha;
     if (!speaking && vn.speaker !== "narr") vctx.filter = "brightness(0.62)";   // 말하지 않는 사람은 어둡게
-    vctx.translate(st.x + m.x, 880 + (speaking ? 0 : 8) + m.y);
+    const talkBob = sprite && mouthOn ? -Math.abs(Math.sin(clockTime * 11)) * 3 : 0;   // 그림 캐릭터는 말할 때 살짝 들썩
+    vctx.translate(st.x + m.x, feetY + (speaking ? 0 : 8) + m.y + talkBob);
     vctx.rotate(m.rot);
     vctx.scale(S * (n === 2 && i === 1 ? -1 : 1), S * breath);              // 오른쪽 사람은 왼쪽을 보게
     drawFigure(vctx, L, { expr: st.expr, blink: st.blinkT < 0, ol: 0.24, talk,
                           sway: Math.sin(clockTime * 1.7 + i * 2) * 0.9 });
     vctx.restore();
+    // 그림 캐릭터는 표정이 바뀌지 않으니, 머리 옆에 감정 아이콘(만화 기호)을 띄운다 (화면 좌표에서 그려야 안 뒤집힘)
+    const icon = sprite && MANPU[st.expr];
+    if (icon) {
+      const hd = spriteHead(L);
+      const flip = n === 2 && i === 1 ? -1 : 1;
+      const pop = 1 + Math.max(0, 0.25 - (st.motionT || 0)) * 3;
+      vctx.save();
+      vctx.globalAlpha = st.alpha;
+      vctx.font = `${Math.round(38 * pop)}px sans-serif`;
+      vctx.textAlign = "center";
+      vctx.fillText(icon, st.x + m.x + flip * (hd.x + hd.r * 1.6) * S,
+                    feetY + m.y + (hd.y - hd.r * 0.8) * S + Math.sin(clockTime * 4) * 3);
+      vctx.restore();
+    }
   });
 }
 
@@ -1438,8 +1459,8 @@ function flash() { const f = $("flash"); f.classList.remove("show"); void f.offs
 
 function drawTitleArt() {
   document.querySelectorAll("#title-heroines canvas").forEach((cv) => drawPortrait(cv, LOOKS[cv.dataset.key], "happy"));
-  drawPortrait($("tp-student"), LOOKS.student, "normal");
-  drawPortrait($("tp-future"), LOOKS.future, "happy");
+  drawPortrait($("tp-student"), LOOKS.student, "normal", { zoom: 2.6 });
+  drawPortrait($("tp-future"), LOOKS.future, "happy", { zoom: 2.6 });
 }
 function buildTitle() {
   const box = $("title-heroines");
@@ -1532,7 +1553,7 @@ function showEnding(d, title) {
     .map((h) => `<span style="--c:${LOOKS[h].hairColor}">${STORY.heroines[h].short} 💗${d.aff[h]}</span>`).join("");
   $("ending-collect").textContent = endingSummary();
   $("ending").classList.remove("hidden");
-  drawPortrait($("ep-face"), LOOKS[hero], "happy");
+  drawPortrait($("ep-face"), LOOKS[hero], "happy", { zoom: 2 });
   confetti();
   SFX.end();
 }
@@ -1591,6 +1612,7 @@ function loop(now) {
     $("title-loading").textContent = "대본 파일을 불러오지 못했어요.";
     return;
   }
+  await spritesReady;                                 // 캐릭터 그림 파일을 다 불러올 때까지 기다림
   if (window.LOCAL_API) window.LOCAL_API.init(STORY.heroines);
   await api("/api/state");
   if (!server) return;

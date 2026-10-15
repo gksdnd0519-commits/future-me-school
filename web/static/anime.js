@@ -150,7 +150,7 @@ const LEGWEAR = {
 //   o.blink : 눈 감는 순간인지,  o.talk : 입 벌림 (립싱크),  o.sway : 서 있을 때 머리 흔들림
 //   o.ol    : 외곽선 두께
 // =============================================================
-function drawFigure(c, L, o = {}) {
+function drawFigureCode(c, L, o = {}) {
   const ol = o.ol ?? 1;
   const M = bodyMetrics(L);
   const swing = o.moving ? Math.sin(o.walk || 0) : 0;
@@ -822,7 +822,7 @@ function drawMouth(c, x, y, expr, ol, talk = 0) {
 // 초상화 : 캔버스 하나에 캐릭터의 얼굴과 어깨를 크게 그린다
 // extra : 립싱크(talk)·눈 깜빡임(blink) 같은 추가 옵션
 // =============================================================
-function drawPortrait(canvas, look, expr = "normal", extra = {}) {
+function drawPortraitCode(canvas, look, expr = "normal", extra = {}) {
   const dpr = Math.min(2, window.devicePixelRatio || 1);
   const size = canvas.clientWidth || 160;
   const px = Math.round(size * dpr);
@@ -834,4 +834,62 @@ function drawPortrait(canvas, look, expr = "normal", extra = {}) {
   const S = canvas.width / 30;                        // 가로 30칸 분량 (얼굴 + 어깨)
   c.setTransform(S, 0, 0, S, canvas.width / 2, canvas.width * 0.5 - (M.headCY + 3) * S);
   drawFigure(c, look, { expr, ol: (1.3 * dpr) / S, ...extra });
+}
+
+
+// =============================================================
+// 그림 파일 캐릭터 (static/art/*.png)
+// -------------------------------------------------------------
+// tools/cut_sprites.py 로 캐릭터 시트에서 잘라 낸 그림이 있으면 그 그림으로 그린다.
+// 그림을 못 불러오면 위의 코드 그림(drawFigureCode)으로 대신 그린다.
+// =============================================================
+const SPRITES = {};                                   // 캐릭터 이름 → { img: 그림, m: 크기 정보 }
+for (const k of Object.keys(LOOKS)) LOOKS[k].key = k;
+
+// 모든 그림을 불러올 때까지 기다리는 약속(Promise). game.js 가 시작할 때 기다린다
+const spritesReady = (async () => {
+  try {
+    const meta = await (await fetch("static/art/sprites.json")).json();
+    await Promise.all(Object.entries(meta).map(([k, m]) => new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => { SPRITES[k] = { img, m }; resolve(); };
+      img.onerror = resolve;                          // 실패해도 멈추지 않고 코드 그림 사용
+      img.src = `static/art/${k}.png`;
+    })));
+  } catch (e) { /* sprites.json 이 없으면 코드 그림만 사용 */ }
+})();
+
+const hasSprite = (L) => !!(L && L.key && SPRITES[L.key]);
+
+// 발 위치 기준으로 얼굴이 어디쯤 있는지 (몸 좌표). 감정 아이콘 위치에 쓴다
+function spriteHead(L) {
+  const { m } = SPRITES[L.key];
+  const k = L.h / m.h;
+  return { x: (m.headX - m.footX) * k, y: -(m.h - m.headY) * k, r: m.headR * k };
+}
+
+function drawFigure(c, L, o = {}) {
+  if (!hasSprite(L)) return drawFigureCode(c, L, o);
+  const { img, m } = SPRITES[L.key];
+  const k = L.h / m.h;                                // 그림 1픽셀 = 몸 좌표 k 칸
+  c.save();
+  if (o.moving) c.rotate(Math.sin(o.walk || 0) * 0.05);   // 걸을 때 좌우로 뒤뚱뒤뚱
+  c.imageSmoothingQuality = "high";
+  c.drawImage(img, -m.footX * k, -m.h * k, m.w * k, m.h * k);
+  c.restore();
+}
+
+function drawPortrait(canvas, look, expr = "normal", extra = {}) {
+  if (!hasSprite(look)) return drawPortraitCode(canvas, look, expr, extra);
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const px = Math.round((canvas.clientWidth || 160) * dpr);
+  if (canvas.width !== px) { canvas.width = px; canvas.height = px; }
+  const c = canvas.getContext("2d");
+  c.setTransform(1, 0, 0, 1, 0, 0);
+  c.clearRect(0, 0, px, px);
+  const { img, m } = SPRITES[look.key];
+  // 얼굴 + 어깨가 들어오는 정사각형 (원본 픽셀). zoom 을 키우면 상반신까지 넓게 → 큰 칸에서도 덜 깨짐
+  const size = m.headR * 3.4 * (extra.zoom || 1);
+  c.imageSmoothingQuality = "high";
+  c.drawImage(img, m.headX - size / 2, m.headY - m.headR * 1.4, size, size, 0, 0, px, px);
 }

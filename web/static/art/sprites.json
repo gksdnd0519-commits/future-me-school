@@ -1,0 +1,82 @@
+{
+ "seorin": {
+  "w": 153,
+  "h": 437,
+  "footX": 92.9,
+  "headX": 85.6,
+  "headY": 37.1,
+  "headR": 30.6
+ },
+ "hayul": {
+  "w": 148,
+  "h": 440,
+  "footX": 56.8,
+  "headX": 80.0,
+  "headY": 37.4,
+  "headR": 30.8
+ },
+ "sion": {
+  "w": 148,
+  "h": 445,
+  "footX": 61.1,
+  "headX": 74.9,
+  "headY": 37.8,
+  "headR": 31.2
+ },
+ "bom": {
+  "w": 152,
+  "h": 445,
+  "footX": 63.8,
+  "headX": 91.5,
+  "headY": 37.8,
+  "headR": 31.2
+ },
+ "han": {
+  "w": 133,
+  "h": 429,
+  "footX": 56.0,
+  "headX": 58.9,
+  "headY": 36.5,
+  "headR": 30.0
+ },
+ "yuri": {
+  "w": 102,
+  "h": 444,
+  "footX": 56.5,
+  "headX": 53.5,
+  "headY": 37.7,
+  "headR": 31.1
+ },
+ "student": {
+  "w": 140,
+  "h": 461,
+  "footX": 64.4,
+  "headX": 83.2,
+  "headY": 39.2,
+  "headR": 32.3
+ },
+ "doyun": {
+  "w": 159,
+  "h": 462,
+  "footX": 100.3,
+  "headX": 62.7,
+  "headY": 39.3,
+  "headR": 32.3
+ },
+ "kim": {
+  "w": 151,
+  "h": 466,
+  "footX": 78.5,
+  "headX": 66.7,
+  "headY": 39.6,
+  "headR": 32.6
+ },
+ "future": {
+  "w": 142,
+  "h": 460,
+  "footX": 78.7,
+  "headX": 56.3,
+  "headY": 39.1,
+  "headR": 32.2
+ }
+}
