@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--
+  게임 화면의 뼈대(HTML).
+  - <canvas id="world"> : 학교 지도와 캐릭터를 그리는 "그림판". game.js 가 1초에 60번 다시 그린다.
+  - 그 위에 점수판(HUD), 행동 메뉴, 대화창, 시작/엔딩 화면 같은 상자를 겹쳐 올린다.
+  - 작은 <canvas> 들은 캐릭터 초상화 (anime.js 의 drawPortrait 가 그림)
+  id="이름" 은 game.js 가 그 상자를 찾아 내용을 바꿀 때 쓰는 이름표.
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>미래의 나와 하루 학교</title>
+  <!-- Google 글꼴 : 귀여운 게임용 한글 글꼴 (인터넷이 없으면 기본 글꼴로 나옴) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <!-- url_for('static', ...) : Flask가 static 폴더 안 파일 주소를 만들어 줌 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div id="wrap">
+
+    <!-- ===================== 게임 화면 ===================== -->
+    <div id="frame">
+      <canvas id="world"></canvas>
+
+      <!-- 위쪽 HUD : 점수 / 시간 / 역할 -->
+      <div id="hud">
+        <div class="hud-card stats">
+          <div class="stat"><span class="ico">💪</span><div class="bar"><div id="bar-체력" class="fill hp"></div></div><b id="val-체력">50</b></div>
+          <div class="stat"><span class="ico">📚</span><div class="bar"><div id="bar-성적" class="fill grade"></div></div><b id="val-성적">50</b></div>
+          <div class="stat"><span class="ico">🤝</span><div class="bar"><div id="bar-우정" class="fill friend"></div></div><b id="val-우정">50</b></div>
+        </div>
+        <div class="hud-card clock">
+          <div id="clock">09:00</div>
+          <div id="turn">1교시</div>
+          <div id="periods" class="periods"></div>
+          <div id="friends" class="friends">💬 친구 0/7</div>
+        </div>
+        <div class="hud-card role">
+          <canvas id="role-face" class="role-face"></canvas>
+          <div>
+            <div class="role-label">🎮 지금 나는</div>
+            <div id="role-name">학생</div>
+            <div id="fix-state" class="fix-state">해결 기능 ON</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 행동/대화 가능한 곳에 서면 나오는 안내 -->
+      <div id="prompt" class="prompt hidden"></div>
+
+      <!-- 행동 메뉴 (Space 로 열림) -->
+      <div id="menu" class="menu hidden">
+        <div id="menu-title" class="menu-title"></div>
+        <div id="menu-warn" class="menu-warn hidden"></div>
+        <div id="menu-list" class="menu-list"></div>
+        <div class="menu-help">↑↓ 고르기 · Space/Enter 결정 · 1~3 바로 선택 · Esc 닫기</div>
+      </div>
+
+      <!-- 대화창 (비주얼 노벨 방식) -->
+      <div id="dialog" class="dialog hidden">
+        <canvas id="dlg-portrait" class="dlg-portrait"></canvas>
+        <div class="dlg-box">
+          <div id="dlg-name" class="dlg-name"></div>
+          <div id="dlg-text" class="dlg-text"></div>
+          <div class="dlg-next">▼ <small>Space</small></div>
+        </div>
+      </div>
+
+      <!-- 알림 / 큰 글씨 연출 / 번쩍임 -->
+      <div id="toast" class="toast"></div>
+      <div id="banner" class="banner"></div>
+      <div id="flash" class="flash"></div>
+
+      <!-- 시작 화면 -->
+      <div id="title" class="screen title-screen">
+        <div class="title-art">
+          <canvas id="tp-student" class="tp tp-left"></canvas>
+          <canvas id="tp-future" class="tp tp-right"></canvas>
+        </div>
+        <div class="screen-box title-box">
+          <div class="logo-sub">하루 학교 시뮬레이션</div>
+          <h1 class="logo">미래의 나와<br>하루 학교</h1>
+          <p class="story">오늘 아침, 10년 뒤의 내가 학교에 나타났다.<br>
+            5교시 동안 학교를 돌아다니며 하루를 보내자.<br>
+            <b>그런데 3교시 종이 울리면… 무언가 뒤바뀐다?!</b></p>
+          <button id="btn-start" class="big-btn">▶ 시작하기 <small>(Enter)</small></button>
+          <div class="cast-title">— 등장인물 —</div>
+          <div id="cast" class="cast"></div>
+          <div class="keys-mini">
+            <span><kbd>WASD</kbd>/<kbd>방향키</kbd> 이동</span>
+            <span><kbd>Space</kbd> 행동·대화</span>
+            <span><kbd>H</kbd> 도움말</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 도움말 화면 -->
+      <div id="help" class="screen hidden">
+        <div class="screen-box">
+          <h2>🎮 조작법</h2>
+          <table class="keys">
+            <tr><td><kbd>W A S D</kbd> / <kbd>방향키</kbd></td><td>캐릭터 이동</td></tr>
+            <tr><td><kbd>Shift</kbd> 누른 채 이동</td><td>달리기</td></tr>
+            <tr><td><kbd>Space</kbd> / <kbd>E</kbd></td><td>빛나는 곳: 행동 메뉴 · 친구 앞: 대화 · 대화창: 다음</td></tr>
+            <tr><td><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></td><td>메뉴에서 바로 고르기</td></tr>
+            <tr><td><kbd>U</kbd></td><td>↩ 되돌리기</td></tr>
+            <tr><td><kbd>Q</kbd></td><td>🔄 역할 바꾸기 (돌발 상황 재현)</td></tr>
+            <tr><td><kbd>F</kbd></td><td>해결 기능 켜기/끄기 (버그 시연)</td></tr>
+            <tr><td><kbd>R</kbd></td><td>⟳ 처음부터</td></tr>
+            <tr><td><kbd>M</kbd></td><td>🔊 소리 켜기/끄기</td></tr>
+          </table>
+          <h2>📏 규칙</h2>
+          <ul class="rules">
+            <li>장소마다 보너스가 있어요 (교실·도서관 📚, 급식실 🤝, 운동장·보건실 💪 +5)</li>
+            <li>친구·선생님과 하루에 한 번 대화하면 점수 +3 (교시는 지나가지 않아요)</li>
+            <li>체력이 10 아래로 떨어지는 행동은 할 수 없어요 😵</li>
+            <li>3교시가 되면 <b>내가 조종하는 캐릭터와 역할이 바뀌어요</b> — 친구들의 반응도 달라져요!</li>
+            <li>5교시가 끝나면 점수 합계로 등급(S~C)과 엔딩이 나와요</li>
+          </ul>
+          <button id="btn-help-close" class="big-btn">닫기 <small>(H / Esc)</small></button>
+        </div>
+      </div>
+
+      <!-- 엔딩 화면 -->
+      <div id="ending" class="screen hidden">
+        <div class="screen-box ending-box">
+          <canvas id="ep-future" class="ep"></canvas>
+          <div>
+            <div class="logo-sub">🔔 하루 끝!</div>
+            <div id="ending-grade" class="grade-badge">A</div>
+            <p class="ending-who">나 (10년 후)</p>
+            <p id="ending-text" class="ending-text"></p>
+            <div id="ending-stats" class="ending-stats"></div>
+            <button id="btn-again" class="big-btn">⟳ 다시 하기 <small>(R)</small></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== 아래 도구 막대 ===================== -->
+    <div id="toolbar">
+      <button id="btn-undo"  class="tool">↩ 되돌리기 <kbd>U</kbd></button>
+      <button id="btn-swap"  class="tool hot">🔄 역할 바꾸기 <kbd>Q</kbd></button>
+      <button id="btn-reset" class="tool">⟳ 처음부터 <kbd>R</kbd></button>
+      <label class="tool switch"><input type="checkbox" id="fix-toggle" checked> 해결 기능 <kbd>F</kbd></label>
+      <button id="btn-mute"  class="tool">🔊 소리 <kbd>M</kbd></button>
+      <button id="btn-help"  class="tool">❓ 도움말 <kbd>H</kbd></button>
+    </div>
+
+    <!-- ===================== 기록 ===================== -->
+    <details id="log-box" open>
+      <summary>📜 오늘의 기록</summary>
+      <ul id="log" class="log"></ul>
+    </details>
+  </div>
+
+  <!-- anime.js(캐릭터 그림)를 먼저 불러야 game.js 가 그 함수를 쓸 수 있다 -->
+  <script src="{{ url_for('static', filename='anime.js') }}"></script>
+  <script src="{{ url_for('static', filename='game.js') }}"></script>
+</body>
+</html>
